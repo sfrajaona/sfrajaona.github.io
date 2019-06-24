@@ -9,8 +9,8 @@ Author URI: mbola tsy manana
 */
 :root {
   --secondary-theme-color: #666 ;/*#3FB2E8 */ /* blue-kuler */
-  --primary-theme-color: #f3f3f3 ; /* thegrey */
-  --tertiary-theme-color: rgba(101, 101, 101, .3) ; /* thedarkgrey */
+  --primary-theme-color: rgba(235,240,240, .3) ; /* thegrey */
+  --tertiary-theme-color: rgba(177, 193, 188, .3) ; /* thedarkgrey */
 }
 
 header, section, footer, aside, nav, main, article, figure { 
@@ -167,11 +167,11 @@ sub {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: var(--primary-theme-color);
+    /*background-color: var(--primary-theme-color);*/
 }
 
 .navbar__link {
-    color: #666;
+    /*color: #666;*/
     display: block;
     text-align: center;
     padding: 14px 16px;
