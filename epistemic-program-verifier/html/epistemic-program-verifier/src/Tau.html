@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE GADTs #-}</span><span>
+</span><span id="line-2"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Tau</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-3"></span><span class="hs-comment">--  working : printing Modalformula</span><span>
+</span><span id="line-4"></span><span class="hs-comment">--  working: tau from ModalFormula to FOLFormula</span><span>
+</span><span id="line-5"></span><span class="hs-comment">--  Not working : printing FOLformula</span><span>
+</span><span id="line-6"></span><span class="hs-comment">--  Todos : translate FOLFormula to SBV for finite datatype</span><span>
+</span><span id="line-7"></span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Logics.html"><span class="hs-identifier">Logics</span></a></span><span>
+</span><span id="line-9"></span><span class="hs-comment">-- import WeakestPreconditions</span><span>
+</span><span id="line-10"></span><span class="hs-comment">-- import ToString </span><span>
+</span><span id="line-11"></span><span>
+</span><span id="line-12"></span><span id="local-6989586621679061286"><span class="annot"><a href="Tau.html#tau"><span class="hs-identifier hs-type">tau</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Logics.html#FOLFormula"><span class="hs-identifier hs-type">FOLFormula</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Logics.html#Formula"><span class="hs-identifier hs-type">Formula</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679061286"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Logics.html#FOLFormula"><span class="hs-identifier hs-type">FOLFormula</span></a></span></span><span>
+</span><span id="line-13"></span><span id="tau"><span class="annot"><span class="annottext">tau :: FOLFormula -&gt; Formula a -&gt; FOLFormula
+</span><a href="Tau.html#tau"><span class="hs-identifier hs-var hs-var">tau</span></a></span></span><span> </span><span id="local-6989586621679061272"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061272"><span class="hs-identifier hs-var">phi</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Logics.html#Atom"><span class="hs-identifier hs-type">Atom</span></a></span><span> </span><span id="local-6989586621679061270"><span class="annot"><span class="annottext">BExpr
+</span><a href="#local-6989586621679061270"><span class="hs-identifier hs-var">p</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">BExpr -&gt; FOLFormula
+forall t. BExpr -&gt; Formula t
+</span><a href="Logics.html#Atom"><span class="hs-identifier hs-var">Atom</span></a></span><span> </span><span class="annot"><span class="annottext">BExpr
+</span><a href="#local-6989586621679061270"><span class="hs-identifier hs-var">p</span></a></span><span> </span><span>
+</span><span id="line-14"></span><span class="annot"><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span id="local-6989586621679061269"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061269"><span class="hs-identifier hs-var">phi</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Logics.html#Neg"><span class="hs-identifier hs-type">Neg</span></a></span><span> </span><span id="local-6989586621679061267"><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061267"><span class="hs-identifier hs-var">alpha</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">FOLFormula -&gt; FOLFormula
+forall t. Formula t -&gt; Formula t
+</span><a href="Logics.html#Neg"><span class="hs-identifier hs-var">Neg</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FOLFormula -&gt; Formula a -&gt; FOLFormula
+forall a. FOLFormula -&gt; Formula a -&gt; FOLFormula
+</span><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061269"><span class="hs-identifier hs-var">phi</span></a></span><span> </span><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061267"><span class="hs-identifier hs-var">alpha</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span class="annot"><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span id="local-6989586621679061266"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061266"><span class="hs-identifier hs-var">phi</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Logics.html#Conj"><span class="hs-identifier hs-type">Conj</span></a></span><span> </span><span id="local-6989586621679061264"><span class="annot"><span class="annottext">[Formula a]
+</span><a href="#local-6989586621679061264"><span class="hs-keyword hs-var">as</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[FOLFormula] -&gt; FOLFormula
+forall t. [Formula t] -&gt; Formula t
+</span><a href="Logics.html#Conj"><span class="hs-identifier hs-var">Conj</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">FOLFormula -&gt; Formula a -&gt; FOLFormula
+forall a. FOLFormula -&gt; Formula a -&gt; FOLFormula
+</span><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061266"><span class="hs-identifier hs-var">phi</span></a></span><span> </span><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061263"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679061263"><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061263"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[Formula a]
+</span><a href="#local-6989586621679061264"><span class="hs-keyword hs-var">as</span></a></span><span class="hs-special">]</span><span> </span><span>
+</span><span id="line-16"></span><span class="annot"><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span id="local-6989586621679061262"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061262"><span class="hs-identifier hs-var">phi</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Logics.html#Disj"><span class="hs-identifier hs-type">Disj</span></a></span><span> </span><span id="local-6989586621679061260"><span class="annot"><span class="annottext">[Formula a]
+</span><a href="#local-6989586621679061260"><span class="hs-keyword hs-var">as</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[FOLFormula] -&gt; FOLFormula
+forall t. [Formula t] -&gt; Formula t
+</span><a href="Logics.html#Disj"><span class="hs-identifier hs-var">Disj</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">FOLFormula -&gt; Formula a -&gt; FOLFormula
+forall a. FOLFormula -&gt; Formula a -&gt; FOLFormula
+</span><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061262"><span class="hs-identifier hs-var">phi</span></a></span><span> </span><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061259"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679061259"><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061259"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[Formula a]
+</span><a href="#local-6989586621679061260"><span class="hs-keyword hs-var">as</span></a></span><span class="hs-special">]</span><span> </span><span>
+</span><span id="line-17"></span><span class="annot"><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span id="local-6989586621679061258"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061258"><span class="hs-identifier hs-var">phi</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Logics.html#Imp"><span class="hs-identifier hs-type">Imp</span></a></span><span> </span><span id="local-6989586621679061256"><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061256"><span class="hs-identifier hs-var">alpha1</span></a></span></span><span> </span><span id="local-6989586621679061255"><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061255"><span class="hs-identifier hs-var">alpha2</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">FOLFormula -&gt; FOLFormula -&gt; FOLFormula
+forall t. Formula t -&gt; Formula t -&gt; Formula t
+</span><a href="Logics.html#Imp"><span class="hs-identifier hs-var">Imp</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FOLFormula -&gt; Formula a -&gt; FOLFormula
+forall a. FOLFormula -&gt; Formula a -&gt; FOLFormula
+</span><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061258"><span class="hs-identifier hs-var">phi</span></a></span><span> </span><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061256"><span class="hs-identifier hs-var">alpha1</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FOLFormula -&gt; Formula a -&gt; FOLFormula
+forall a. FOLFormula -&gt; Formula a -&gt; FOLFormula
+</span><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061258"><span class="hs-identifier hs-var">phi</span></a></span><span> </span><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061255"><span class="hs-identifier hs-var">alpha2</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-18"></span><span class="annot"><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span id="local-6989586621679061254"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061254"><span class="hs-identifier hs-var">phi</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Logics.html#Equiv"><span class="hs-identifier hs-type">Equiv</span></a></span><span> </span><span id="local-6989586621679061252"><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061252"><span class="hs-identifier hs-var">alpha1</span></a></span></span><span> </span><span id="local-6989586621679061251"><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061251"><span class="hs-identifier hs-var">alpha2</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">FOLFormula -&gt; FOLFormula -&gt; FOLFormula
+forall t. Formula t -&gt; Formula t -&gt; Formula t
+</span><a href="Logics.html#Equiv"><span class="hs-identifier hs-var">Equiv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FOLFormula -&gt; Formula a -&gt; FOLFormula
+forall a. FOLFormula -&gt; Formula a -&gt; FOLFormula
+</span><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061254"><span class="hs-identifier hs-var">phi</span></a></span><span> </span><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061252"><span class="hs-identifier hs-var">alpha1</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FOLFormula -&gt; Formula a -&gt; FOLFormula
+forall a. FOLFormula -&gt; Formula a -&gt; FOLFormula
+</span><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061254"><span class="hs-identifier hs-var">phi</span></a></span><span> </span><span class="annot"><span class="annottext">Formula a
+</span><a href="#local-6989586621679061251"><span class="hs-identifier hs-var">alpha2</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-19"></span><span class="annot"><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span id="local-6989586621679061250"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061250"><span class="hs-identifier hs-var">phi</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Logics.html#Announce"><span class="hs-identifier hs-type">Announce</span></a></span><span> </span><span id="local-6989586621679061248"><span class="annot"><span class="annottext">Formula Modal
+</span><a href="#local-6989586621679061248"><span class="hs-identifier hs-var">alpha1</span></a></span></span><span> </span><span id="local-6989586621679061247"><span class="annot"><span class="annottext">Formula Modal
+</span><a href="#local-6989586621679061247"><span class="hs-identifier hs-var">alpha2</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">FOLFormula -&gt; Formula Modal -&gt; FOLFormula
+forall a. FOLFormula -&gt; Formula a -&gt; FOLFormula
+</span><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061250"><span class="hs-identifier hs-var">phi</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Formula Modal -&gt; Formula Modal
+</span><a href="Logics.html#noAnn"><span class="hs-identifier hs-var">noAnn</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Formula Modal -&gt; Formula Modal -&gt; Formula Modal
+</span><a href="Logics.html#Announce"><span class="hs-identifier hs-var">Announce</span></a></span><span> </span><span class="annot"><span class="annottext">Formula Modal
+</span><a href="#local-6989586621679061248"><span class="hs-identifier hs-var">alpha1</span></a></span><span> </span><span class="annot"><span class="annottext">Formula Modal
+</span><a href="#local-6989586621679061247"><span class="hs-identifier hs-var">alpha2</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span>
+</span><span id="line-20"></span><span class="annot"><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span id="local-6989586621679061245"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061245"><span class="hs-identifier hs-var">phi</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Logics.html#K"><span class="hs-identifier hs-type">K</span></a></span><span> </span><span id="local-6989586621679061243"><span class="annot"><span class="annottext">Agent
+</span><a href="#local-6989586621679061243"><span class="hs-identifier hs-var">ag</span></a></span></span><span> </span><span id="local-6989586621679061242"><span class="annot"><span class="annottext">Formula Modal
+</span><a href="#local-6989586621679061242"><span class="hs-identifier hs-var">alpha</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Var] -&gt; FOLFormula -&gt; FOLFormula
+</span><a href="Tau.html#forAll"><span class="hs-identifier hs-var">forAll</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Agent -&gt; [Var]
+</span><a href="Logics.html#nonobs"><span class="hs-identifier hs-var hs-var">nonobs</span></a></span><span> </span><span class="annot"><span class="annottext">Agent
+</span><a href="#local-6989586621679061243"><span class="hs-identifier hs-var">ag</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FOLFormula -&gt; FOLFormula -&gt; FOLFormula
+forall t. Formula t -&gt; Formula t -&gt; Formula t
+</span><a href="Logics.html#Imp"><span class="hs-identifier hs-var">Imp</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061245"><span class="hs-identifier hs-var">phi</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FOLFormula -&gt; Formula Modal -&gt; FOLFormula
+forall a. FOLFormula -&gt; Formula a -&gt; FOLFormula
+</span><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061245"><span class="hs-identifier hs-var">phi</span></a></span><span> </span><span class="annot"><span class="annottext">Formula Modal
+</span><a href="#local-6989586621679061242"><span class="hs-identifier hs-var">alpha</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span>
+</span><span id="line-21"></span><span class="annot"><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span id="local-6989586621679061239"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061239"><span class="hs-identifier hs-var">phi</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Logics.html#Box"><span class="hs-identifier hs-type">Box</span></a></span><span> </span><span id="local-6989586621679061237"><span class="annot"><span class="annottext">Prog
+</span><a href="#local-6989586621679061237"><span class="hs-identifier hs-var">prog</span></a></span></span><span> </span><span id="local-6989586621679061236"><span class="annot"><span class="annottext">Formula Modal
+</span><a href="#local-6989586621679061236"><span class="hs-identifier hs-var">alpha</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">FOLFormula -&gt; Formula Modal -&gt; FOLFormula
+forall a. FOLFormula -&gt; Formula a -&gt; FOLFormula
+</span><a href="Tau.html#tau"><span class="hs-identifier hs-var">tau</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061239"><span class="hs-identifier hs-var">phi</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Formula Modal -&gt; Prog -&gt; Formula Modal
+</span><a href="Logics.html#wp"><span class="hs-identifier hs-var">wp</span></a></span><span> </span><span class="annot"><span class="annottext">Formula Modal
+</span><a href="#local-6989586621679061236"><span class="hs-identifier hs-var">alpha</span></a></span><span> </span><span class="annot"><span class="annottext">Prog
+</span><a href="#local-6989586621679061237"><span class="hs-identifier hs-var">prog</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-22"></span><span>
+</span><span id="line-23"></span><span class="hs-comment">-- | forAll is a shortcut for writing Forall</span><span>
+</span><span id="line-24"></span><span class="hs-comment">--  it accepts a list of variables (of any type) </span><span>
+</span><span id="line-25"></span><span class="annot"><a href="Tau.html#forAll"><span class="hs-identifier hs-type">forAll</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Logics.html#Var"><span class="hs-identifier hs-type">Var</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Logics.html#FOLFormula"><span class="hs-identifier hs-type">FOLFormula</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Logics.html#FOLFormula"><span class="hs-identifier hs-type">FOLFormula</span></a></span><span>
+</span><span id="line-26"></span><span id="forAll"><span class="annot"><span class="annottext">forAll :: [Var] -&gt; FOLFormula -&gt; FOLFormula
+</span><a href="Tau.html#forAll"><span class="hs-identifier hs-var hs-var">forAll</span></a></span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span id="local-6989586621679061234"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061234"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061234"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span>
+</span><span id="line-27"></span><span class="annot"><a href="Tau.html#forAll"><span class="hs-identifier hs-var">forAll</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Logics.html#BVar"><span class="hs-identifier hs-type">BVar</span></a></span><span> </span><span id="local-6989586621679061232"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679061232"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">]</span><span> </span><span id="local-6989586621679061231"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061231"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(BExpr -&gt; FOLFormula) -&gt; FOLFormula
+</span><a href="Logics.html#Forall"><span class="hs-identifier hs-var">Forall</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679061229"><span class="annot"><span class="annottext">BExpr
+</span><a href="#local-6989586621679061229"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Var -&gt; BExpr -&gt; FOLFormula -&gt; FOLFormula
+forall a b. Var -&gt; Expr a -&gt; Formula b -&gt; Formula b
+</span><a href="Logics.html#sub"><span class="hs-identifier hs-var">sub</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; Var
+</span><a href="Logics.html#BVar"><span class="hs-identifier hs-var">BVar</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679061232"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">BExpr
+</span><a href="#local-6989586621679061229"><span class="hs-identifier hs-var">z</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061231"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span> </span><span>
+</span><span id="line-28"></span><span class="hs-comment">-- forAll [NVar x] f = ForallInt (intDomain (NVar x))  (\z -&gt; sub (NVar x) z f) </span><span>
+</span><span id="line-29"></span><span class="annot"><a href="Tau.html#forAll"><span class="hs-identifier hs-var">forAll</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><a href="Logics.html#NVar"><span class="hs-identifier hs-type">NVar</span></a></span><span> </span><span id="local-6989586621679061226"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679061226"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">]</span><span> </span><span id="local-6989586621679061225"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061225"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[FOLFormula] -&gt; FOLFormula
+forall t. [Formula t] -&gt; Formula t
+</span><a href="Logics.html#Conj"><span class="hs-identifier hs-var">Conj</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Var -&gt; Expr Int -&gt; FOLFormula -&gt; FOLFormula
+forall a b. Var -&gt; Expr a -&gt; Formula b -&gt; Formula b
+</span><a href="Logics.html#sub"><span class="hs-identifier hs-var">sub</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; Var
+</span><a href="Logics.html#NVar"><span class="hs-identifier hs-var">NVar</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679061226"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SInteger -&gt; Expr Int
+</span><a href="Logics.html#I"><span class="hs-identifier hs-var">I</span></a></span><span> </span><span class="annot"><span class="annottext">SInteger
+</span><a href="#local-6989586621679061223"><span class="hs-identifier hs-var">z</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061225"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679061223"><span class="annot"><span class="annottext">SInteger
+</span><a href="#local-6989586621679061223"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Var -&gt; IntDomain
+</span><a href="Logics.html#intDomain"><span class="hs-identifier hs-var">intDomain</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; Var
+</span><a href="Logics.html#NVar"><span class="hs-identifier hs-var">NVar</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679061226"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
+</span><span id="line-30"></span><span class="annot"><a href="Tau.html#forAll"><span class="hs-identifier hs-var">forAll</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Logics.html#BVar"><span class="hs-identifier hs-type">BVar</span></a></span><span> </span><span id="local-6989586621679061221"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679061221"><span class="hs-identifier hs-var">x</span></a></span></span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span id="local-6989586621679061220"><span class="annot"><span class="annottext">[Var]
+</span><a href="#local-6989586621679061220"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679061219"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061219"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(BExpr -&gt; FOLFormula) -&gt; FOLFormula
+</span><a href="Logics.html#Forall"><span class="hs-identifier hs-var">Forall</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679061218"><span class="annot"><span class="annottext">BExpr
+</span><a href="#local-6989586621679061218"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Var -&gt; BExpr -&gt; FOLFormula -&gt; FOLFormula
+forall a b. Var -&gt; Expr a -&gt; Formula b -&gt; Formula b
+</span><a href="Logics.html#sub"><span class="hs-identifier hs-var">sub</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; Var
+</span><a href="Logics.html#BVar"><span class="hs-identifier hs-var">BVar</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679061221"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">BExpr
+</span><a href="#local-6989586621679061218"><span class="hs-identifier hs-var">z</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Var] -&gt; FOLFormula -&gt; FOLFormula
+</span><a href="Tau.html#forAll"><span class="hs-identifier hs-var">forAll</span></a></span><span> </span><span class="annot"><span class="annottext">[Var]
+</span><a href="#local-6989586621679061220"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061219"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-31"></span><span class="annot"><a href="Tau.html#forAll"><span class="hs-identifier hs-var">forAll</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Logics.html#NVar"><span class="hs-identifier hs-type">NVar</span></a></span><span> </span><span id="local-6989586621679061217"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679061217"><span class="hs-identifier hs-var">x</span></a></span></span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span id="local-6989586621679061216"><span class="annot"><span class="annottext">[Var]
+</span><a href="#local-6989586621679061216"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679061215"><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061215"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[FOLFormula] -&gt; FOLFormula
+forall t. [Formula t] -&gt; Formula t
+</span><a href="Logics.html#Conj"><span class="hs-identifier hs-var">Conj</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Var -&gt; Expr Int -&gt; FOLFormula -&gt; FOLFormula
+forall a b. Var -&gt; Expr a -&gt; Formula b -&gt; Formula b
+</span><a href="Logics.html#sub"><span class="hs-identifier hs-var">sub</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; Var
+</span><a href="Logics.html#NVar"><span class="hs-identifier hs-var">NVar</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679061217"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SInteger -&gt; Expr Int
+</span><a href="Logics.html#I"><span class="hs-identifier hs-var">I</span></a></span><span> </span><span class="annot"><span class="annottext">SInteger
+</span><a href="#local-6989586621679061214"><span class="hs-identifier hs-var">z</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Var] -&gt; FOLFormula -&gt; FOLFormula
+</span><a href="Tau.html#forAll"><span class="hs-identifier hs-var">forAll</span></a></span><span> </span><span class="annot"><span class="annottext">[Var]
+</span><a href="#local-6989586621679061216"><span class="hs-identifier hs-var">xs</span></a></span><span> </span><span class="annot"><span class="annottext">FOLFormula
+</span><a href="#local-6989586621679061215"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679061214"><span class="annot"><span class="annottext">SInteger
+</span><a href="#local-6989586621679061214"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Var -&gt; IntDomain
+</span><a href="Logics.html#intDomain"><span class="hs-identifier hs-var">intDomain</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; Var
+</span><a href="Logics.html#NVar"><span class="hs-identifier hs-var">NVar</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679061217"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">]</span><span>
+</span><span id="line-32"></span><span>
+</span><span id="line-33"></span></pre></body></html>
