@@ -52,7 +52,6 @@ data Expr a
 
 -- | Boolean variable
 [BValue] :: Var -> Expr Bool
-[BEq] :: Expr Bool -> Expr Bool -> Expr Bool
 [Xor] :: [Expr Bool] -> Expr Bool
 [Or] :: [Expr Bool] -> Expr Bool
 [And] :: [Expr Bool] -> Expr Bool
@@ -79,26 +78,12 @@ data Formula t
 
 -- | Dynamic modal operator
 [Box] :: Prog -> Formula Modal -> Formula Modal
-[ForAllB] :: Int -> Formula t -> Formula t
-[ExistsB] :: Int -> Formula t -> Formula t
+[Forall] :: (Expr Bool -> Formula FOL) -> Formula FOL
+[Exists] :: (Expr Bool -> Formula FOL) -> Formula FOL
+[ForallInt] :: IntDomain -> (Expr Int -> Formula FOL) -> Formula FOL
+[ExistsInt] :: IntDomain -> (Expr Int -> Formula FOL) -> Formula FOL
 [BSub] :: Var -> Expr Bool -> Formula Modal -> Formula Modal
 [NSub] :: Var -> Expr Int -> Formula Modal -> Formula Modal
-
--- | <a>yvar</a> constructs a variable &lt;math&gt; for an integer i
-yvar :: Int -> Var
-
--- | <a>uvar</a> constructs a variable &lt;math&gt; for an integer i
-uvar :: Int -> Var
-
--- | this function choose an appropriate index &lt;math&gt; to build
---   universal quantification &lt;math&gt; from of a lambda abstracted
---   <a>FOLFormula</a>.
-forAllB :: (Var -> Formula a) -> Formula a
-
--- | similar to <a>forAllB</a> but with existential
-existsB :: (Var -> Formula a) -> Formula a
-maxYBV :: Formula a -> Int
-maxUBV :: Formula a -> Int
 kw :: Agent -> ModalFormula -> ModalFormula
 kv :: Agent -> Var -> ModalFormula
 data Modal
@@ -182,11 +167,34 @@ subBool :: Var -> BExpr -> Formula a -> Formula a
 -- | <a>subNum</a> propagates the substitution inside integer expressions
 --   into a formula
 subNum :: Var -> NExpr -> Formula a -> Formula a
-
--- | <a>noDisj</a> eliminates disjunction, necessary for <tt>noAnn</tt>
-noDisj :: Formula a -> Formula a
 instance GHC.Classes.Ord Logics.Var
+instance GHC.Show.Show Logics.Var
 instance GHC.Classes.Eq Logics.Var
+instance GHC.Show.Show Logics.Agent
+
+
+module StateInitialisation
+
+-- | Utility functions for state initialisation
+type State = (Map Var Bool, Map Var Integer)
+
+-- | function that converts a mapping (Variable,Value) into equality
+--   (Variable=Value)
+toFormulaMap :: Var -> State -> FOLFormula
+
+-- | function that converts a state (list of mapping) into a conjunction of
+--   equality i.e., defines phi(i) = /{var_1=val_1(i) , var2=val_2(i), ...}
+toFormula :: [Var] -> State -> FOLFormula
+
+-- | evaluate a formula at a state, necessary for restricting the initial
+--   states with phi
+eval :: State -> FOLFormula -> Bool
+
+-- | evalBExpr: convert a boolean expression in BExpr into Bool.
+evalBExpr :: State -> BExpr -> Bool
+
+-- | evalNExpr: convert a numerical expression in NExpr into Integer
+evalNExpr :: Map Var Integer -> NExpr -> Integer
 
 
 -- | The main program <a>toSBV</a> takes the list of variables, the
@@ -202,19 +210,17 @@ module ToSBV
 --   and <tt>freeBools</tt>)
 toSBV :: [Var] -> FOLFormula -> FOLFormula -> Predicate
 
--- | toSymb: convert a formula into SBV formula, recall `type State = (Map
---   Var Bool, Map Var Integer)`, here we make the state to take a symbolic
---   value to apply the SMT solver
+-- | toSymb: convert a formula into SBV formula
 toSymb :: (Map Var SBool, Map Var SInteger) -> FOLFormula -> SBool
 
 -- | toSymbBExpr: convert a boolean expression in BExpr into SBV SBool.
 --   variables in the BExpr are replaced by SBV variables created in
---   bmapsools
+--   freeBools
 toSymbBExpr :: (Map Var SBool, Map Var SInteger) -> BExpr -> SBool
 
 -- | toSymbNExpr: convert a numerical expression in NExpr into SBV SInteger
 --   variables in the NExpr are replaced by SBV variables created in
---   nmapsnt
+--   freeInt
 toSymbNExpr :: Map Var SInteger -> NExpr -> SInteger
 
 
@@ -222,8 +228,6 @@ toSymbNExpr :: Map Var SInteger -> NExpr -> SInteger
 --   difficult because we use function for quantification to avoid variable
 --   binding problems.
 module ToString
-precedence :: Formula t -> Int
-precedenceNE :: NExpr -> Int
 
 -- | The main function takes any formula (<a>FOLFormula</a> or
 --   <a>ModalFormula</a>) and returns a string. The output string is
@@ -231,12 +235,6 @@ precedenceNE :: NExpr -> Int
 --   redundant tautologies. The elimination of the annouce logical operator
 --   exploded the size of the formula.
 toString :: Formula a -> String
-toStringPrec :: Int -> Formula a -> String
-separateWithCommas :: [String] -> String
-instance GHC.Show.Show (Logics.Formula a)
-instance GHC.Show.Show Logics.Var
-instance GHC.Show.Show (Logics.Expr a)
-instance GHC.Show.Show Logics.Prog
 
 
 module Translation
@@ -244,14 +242,62 @@ module Translation
 -- | The translation function <tt>tau</tt> takes the constraint formula in
 --   <a>FOLFormula</a> and a target formula in <a>ModalFormula</a>
 --   
---   <tt>(NSub v e alpha)</tt> and <tt>(BSub v e alpha)</tt> are the
---   implementation of <tt>alpha[v/e]</tt> we enumerate all the cases for a
---   formula with <tt>alpha[v/e]</tt> <tt>K_A alpha[v/e]</tt> is the
---   speciall one, for an atom <tt>alpha[v/e]</tt> becomes a simple
---   substitution Some cases are not covered yet, e.g.,
---   <tt>([rho]alpha)[v/e]</tt> Some cases are not covered yet, e.g.,
---   <tt>(alpha[v<i>e])[v'</i>e']</tt>
+--   (NSub v e alpha) and (BSub v e alpha) are the implementation of
+--   alpha[v/e] we enumerate all the cases for a formula with alpha[v/e]
+--   K_A alpha[v<i>e] is the speciall one, for an atom alpha[v</i>e]
+--   becomes a simple substitution Some cases are not covered yet, e.g.,
+--   ([rho]alpha)[v/e] Some cases are not covered yet, e.g.,
+--   (alpha[v<i>e])[v'</i>e']
 tau :: FOLFormula -> Formula a -> FOLFormula
+
+
+-- | Agents &lt;math&gt; sees &lt;math&gt; and &lt;math&gt; sees
+--   &lt;math&gt;, both see &lt;math&gt;. We check the validity of the
+--   following formulae
+--   
+--   &lt;math&gt;
+--   
+--   &lt;math&gt;
+--   
+--   &lt;math&gt;
+module ExampleSimpleA
+
+-- | Usage examples
+--   
+--   <ul>
+--   <li><tt>proveSimpleReveal betaOr</tt> proves &lt;math&gt;</li>
+--   <li><tt>allSatSimpleReveal betaOr</tt> finds the sat set of
+--   &lt;math&gt;</li>
+--   <li><tt>allSatNotSimpleReveal betaOr</tt> finds the sat set of
+--   &lt;math&gt;</li>
+--   </ul>
+allSatSimpleReveal :: BExpr -> IO AllSatResult
+allSatNotSimpleReveal :: BExpr -> IO AllSatResult
+proveSimpleReveal :: BExpr -> IO ThmResult
+
+-- | <pre>
+--   &gt;&gt;&gt; proveSimpleReveal betaOr
+--   Falsifiable. Counter-example:
+--     x  =  True :: Bool
+--     b0 =  True :: Bool
+--     b1 = False :: Bool
+--   </pre>
+betaOr :: BExpr
+
+-- | <pre>
+--   &gt;&gt;&gt; proveSimpleReveal betaAnd
+--   Falsifiable. Counter-example:
+--     x  = False :: Bool
+--     b0 = False :: Bool
+--     b1 = False :: Bool
+--   </pre>
+betaAnd :: BExpr
+
+-- | <pre>
+--   &gt;&gt;&gt; proveSimpleReveal betaXor
+--   Q.E.D.
+--   </pre>
+betaXor :: BExpr
 
 
 -- | <tt>n</tt> agents dine at a round table [Chaum, 1988]. The dinner may
