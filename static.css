@@ -9318,6 +9318,27 @@ April 13, 2018
     color: inherit;
 }
 
+.tb-inc-controls{
+margin-top:-2em;
+padding: 5px;
+display:none;
+}
+.tb-inc-tab-content .tb-inc{
+margin:0;
+padding:0;
+position:relative;
+}
+.tb-inc-tab-content .tb-inc-controls{
+position:absolute;
+margin-top:-5px;
+right:0;
+top:0;
+}
+.tb-inc:hover > .tb-inc-controls{
+display:block;
+float:right;
+}
+
 /* Top and bottom bars *//* Hide the top-right bar */
 .tc-topbar.tc-topbar-right {
   display: none;
@@ -9714,6 +9735,8 @@ April 13, 2018
 #banner_title{font-size: 37px; font-family:"Menlo"; text-align: "left";}
 
 .txt-center {text-align: center; line-height: 10px;}
+.quote {text-align: right; line-height: 10px; font-style: italic; font-size: 12px;}
+
 .tc-language-chooser .tc-image-inactive-button img { width: 1.3em; vertical-align: -0.15em; } 
 .tc-language-chooser .tc-image-active-button img { width: 2em; vertical-align: -0.15em; } 
 
