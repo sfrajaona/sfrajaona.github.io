@@ -91,7 +91,6 @@ Error message and password prompt
 }
 
 
-
 /*
 ** Start with the normalize CSS reset, and then belay some of its effects
 *//*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -537,6 +536,8 @@ input[type="search"]::-webkit-search-results-decoration {
 	color: HighlightText;
 	background-color: ;
 	color: ;
+}form.tc-form-inline {
+	display: inline;
 }/*
 Markdown likes putting code elements inside pre elements
 */
@@ -576,6 +577,8 @@ pre > code {
 .tc-tiddler-body > iframe {
 	width: 100%;
 	height: 600px;
+}:root {
+	color-scheme: light;
 }/*
 ** Links
 */button.tc-tiddlylink,
@@ -646,7 +649,7 @@ a.tc-tiddlylink:hover {
 	right: 0;
 	background: rgba(0,200,0,0.7);
 	text-align: center;
-	content: "Drop here (or use the 'Escape' key to cancel)";
+	content: "Drop now (or use the 'Escape' key to cancel)";
 }.tc-droppable > .tc-droppable-placeholder {
 	display: none;
 }.tc-droppable.tc-dragover > .tc-droppable-placeholder {
@@ -835,7 +838,7 @@ a.tc-tiddlylink:hover {
 	font-weight: normal;
 	line-height: 1.2em;
 	color: #ffffff;
-	white-space: nowrap;
+	white-space: break-spaces;
 	vertical-align: baseline;
 	background-color: #ec6;
 	border-radius: 1em;
@@ -860,7 +863,6 @@ a.tc-tiddlylink:hover {
 	font-size: 0.7em;
 	vertical-align: middle;
 }.tc-tag-manager-table .tc-tag-label {
-	white-space: normal;
 }.tc-tag-manager-tag {
 	width: 100%;
 }button.tc-btn-invisible.tc-remove-tag-button {
@@ -1003,6 +1005,8 @@ a.tc-tiddlylink:hover {
 	width: 100%;
 }.tc-view-field-name {
 	width: 1%; /* Makes this column be as narrow as possible */
+	white-space: nowrap;
+	vertical-align: top;
 	text-align: right;
 	font-style: italic;
 	font-weight: normal;
@@ -1091,17 +1095,27 @@ a.tc-tiddlylink:hover {
 	margin: 4px 0 4px 0;
 }.tc-tiddler-frame input.tc-edit-texteditor,
 .tc-tiddler-frame textarea.tc-edit-texteditor,
-.tc-tiddler-frame iframe.tc-edit-texteditor {
+.tc-tiddler-frame iframe.tc-edit-texteditor,
+.tc-tiddler-frame select.tc-edit-texteditor {
 	padding: 3px 3px 3px 3px;
 	border: 1px solid #cccccc;
 	line-height: 1.3em;
-	-webkit-appearance: none;
 	font-family: ;
 }.tc-tiddler-frame input.tc-edit-texteditor,
+.tc-tiddler-frame textarea.tc-edit-texteditor,
+.tc-tiddler-frame iframe.tc-edit-texteditor {
+	-webkit-appearance: none;
+}.tc-tiddler-frame input.tc-edit-texteditor,
+.tc-tiddler-frame select.tc-edit-texteditor,
 .tc-tiddler-frame textarea.tc-edit-texteditor {
 	background-color: #f8f8f8;
 }.tc-tiddler-frame iframe.tc-edit-texteditor {
 	background-color: #ffffff;
+}.tc-tiddler-frame .tc-edit-fields input.tc-edit-fieldeditor,
+.tc-tiddler-frame .tc-edit-fields select.tc-edit-fieldeditor,
+.tc-tiddler-frame .tc-edit-fields textarea.tc-edit-fieldeditor {
+	margin: 0;
+	padding: 2px 3px;
 }.tc-tiddler-frame .tc-binary-warning {
 	width: 100%;
 	height: 5em;
@@ -1285,7 +1299,7 @@ a.tc-tiddlylink:hover {
 	right:0;
 	height: 100%;
 	background: rgba(0,200,0,0.7);
-	content: "Drop here (or use the 'Escape' key to cancel)";
+	content: "Drop now (or use the 'Escape' key to cancel)";
 	pointer-events: none;
 	position: absolute;
 	display: flex;
@@ -1659,6 +1673,8 @@ a.tc-tiddlylink:hover {
 	
 }.tc-manager-control {
 	margin: 0.5em 0;
+}.tc-manager-control select {
+	max-width: 100%;
 }.tc-manager-list {
 	width: 100%;
 	border-top: 1px solid #bbb;
@@ -1786,7 +1802,7 @@ a.tc-tiddlylink:hover {
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 	border: 1px solid #ffffff;
-	border-bottom-none;
+	border-bottom: none;
 	background: #ff0000;
 	color: #ffffff;
 	fill: #ffffff;
@@ -1807,12 +1823,15 @@ a.tc-tiddlylink:hover {
 	width: 100%;
 }.tc-plugin-info {
 	display: flex;
+	text-shadow: none;
 	border: 1px solid #bbb;
 	fill: #bbb;
 	background-color: #ffffff;
 	margin: 0.5em 0 0.5em 0;
 	padding: 4px;
 	align-items: center;
+}.tc-sidebar-lists a.tc-tiddlylink.tc-plugin-info {
+	color: #5778d8;
 }.tc-plugin-info-sub-plugins .tc-plugin-info {
 	margin: 0.5em;
 	background: #ffffff;
@@ -2063,7 +2082,7 @@ a.tc-tiddlylink:hover {
 	flex: 1 0 50%;
 }/*
 ** Dirty indicator
-*/body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg {
+*/html body.tc-dirty span.tc-dirty-indicator, html body.tc-dirty span.tc-dirty-indicator svg {
 	fill: #ff0000;
 	color: #ff0000;
 }/*
@@ -2258,8 +2277,6 @@ a.tc-tiddlylink:hover {
 	word-break: break-all;
 }
 
-
-
 button.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fclone, .tc-drop-down button.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fclone, div.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fclone,
 button.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fdelete, .tc-drop-down button.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fdelete, div.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fdelete,
 button.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fedit, .tc-drop-down button.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fedit, div.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fedit,
@@ -2272,8 +2289,6 @@ button.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-journal, .tc-drop-down bu
 button.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-tiddler, .tc-drop-down button.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-tiddler, div.tc-btn-\%24\%3A\%2Fcore\%2Fui\%2FButtons\%2Fnew-tiddler {
 	display: none;
 }
-
-
 body.tc-dirty span.tc-dirty-indicator svg {
 	transition: fill 250ms ease-in-out;
 }body .tc-image-cloud-idle {
@@ -2303,8 +2318,6 @@ body.tc-dirty span.tc-dirty-indicator svg {
 		transform: scale(359deg);
 	}
 }
-
-
 /* auto-imported from 'node_modules/@fortawesome/fontawesome-free' version 5.14.0 */
 @font-face {
   font-family: 'Font Awesome 5 Brands';
@@ -2318,8 +2331,6 @@ body.tc-dirty span.tc-dirty-indicator svg {
   font-style: normal;
   font-weight: normal;
 }
-
-
 /* auto-imported from 'node_modules/@fortawesome/fontawesome-free' version 5.14.0 */
 @font-face {
   font-family: 'Font Awesome 5 Free';
@@ -2333,8 +2344,6 @@ body.tc-dirty span.tc-dirty-indicator svg {
   font-style: normal;
   font-weight: 400;
 }
-
-
 /* auto-imported from 'node_modules/@fortawesome/fontawesome-free' version 5.14.0 */
 @font-face {
   font-family: 'Font Awesome 5 Free';
@@ -2349,8 +2358,6 @@ body.tc-dirty span.tc-dirty-indicator svg {
   font-weight: 900;
 }
 
-
-
 a[href^="http://"][href*=".wikipedia.org"]:before {
   font-family: 'Font Awesome 5 Brands';
   font-style: normal;
@@ -2358,10 +2365,6 @@ a[href^="http://"][href*=".wikipedia.org"]:before {
   font-size: 90%;
   content: '[\f266]\202f';
 }
-
-
-
-
 
 
 
@@ -2389,8 +2392,6 @@ a[href$=".tiff"].tc-tiddlylink-external:before {
   display: inline-block;
 }
 
-
-
 a[href^="http://"][href*="github.com"]:before {
   font-family: 'Font Awesome 5 Brands';
   font-style: normal;
@@ -2398,8 +2399,6 @@ a[href^="http://"][href*="github.com"]:before {
   font-size: 90%;
   content: '\f09b\202f';
 }
-
-
 
 a[href^="http://fontawesome.io/"].tc-tiddlylink-external:before,
 a[href^="http://fontawesome.com/"].tc-tiddlylink-external:before,
@@ -2411,8 +2410,6 @@ a[href^="https://fontawesome.com/"].tc-tiddlylink-external:before {
   content: '\f425\202f' !important;
   display: inline-block;
 }
-
-
 /* autoimported from 'node_modules/@fortawesome/fontawesome-free' */
 /*!
  * Font Awesome Free 5.14.0 by @fontawesome - https://fontawesome.com
@@ -6967,8 +6964,6 @@ readers do not read off random characters that represent icons */
   position: static;
   width: auto; }
 
-
-
 /* system tiddler titles starting with $:/... */
 .tc-tiddler-body a.tc-tiddlylink[href^="#%24%3A%2F"]:before,
 .tc-tiddler-preview-preview a.tc-tiddlylink[href^="#%24%3A%2F"]:before {
@@ -6979,8 +6974,6 @@ readers do not read off random characters that represent icons */
   content: '\f013\202f';
   display: inline-block;
 }
-
-
 .tc-relink-references {
 }
 
@@ -7040,17 +7033,11 @@ readers do not read off random characters that represent icons */
 }
 
 
-
-
-
-
 .leftbar{
   border-width:0px !important;
   border-radius:0px !important;
   border-left-width: 5px !important;
-}
-
-/*Was taken from bootstrap 4.1.3*/
+}/*Was taken from bootstrap 4.1.3*/
 .alert {
   position: relative;
   padding: 0.75rem 1.25rem;
@@ -7132,8 +7119,6 @@ readers do not read off random characters that represent icons */
 .alert-dark hr {
   border-top-color: #b9bbbe;
 }
-
-
 .bg-primary {
   background-color: #007bff !important;
 }
@@ -7220,9 +7205,7 @@ button.bg-dark:focus {
 
 .bg-transparent {
   background-color: transparent !important;
-}
-
-/* Extracted from bootstrap 4.1.3 */
+}/* Extracted from bootstrap 4.1.3 */
 .badge {
   display: inline-block;
   padding: 0.25em 0.4em;
@@ -7338,8 +7321,6 @@ button.bg-dark:focus {
   background-color: #1d2124;
 }
 
-
-
 .border {
   border: 1px solid #dee2e6 !important;
 }
@@ -7447,8 +7428,6 @@ button.bg-dark:focus {
 .rounded-0 {
   border-radius: 0 !important;
 }
-
-
 /* Button and btn classes Mohammad*/
 .btn {
   display: inline-block;
@@ -7705,9 +7684,7 @@ fieldset:disabled a.btn {
   font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 0.2rem;
-}
-
-/* Extracted from bootstrap 4.3.1 */
+}/* Extracted from bootstrap 4.3.1 */
 .card-columns .card {
   margin-bottom: 0.75rem;
 }
@@ -7727,9 +7704,7 @@ fieldset:disabled a.btn {
     display: inline-block;
     width: 100%;
   }
-}
-
-/* Extracted from bootstrap 4.1.3 */
+}/* Extracted from bootstrap 4.1.3 */
 
 .card-deck {
   display: -ms-flexbox;
@@ -7760,9 +7735,7 @@ fieldset:disabled a.btn {
     margin-bottom: 0;
     margin-left: 15px;
   }
-}
-
-/* Extracted from bootstrap 4.1.3 */
+}/* Extracted from bootstrap 4.1.3 */
 .card-group {
   display: -ms-flexbox;
   display: flex;
@@ -7835,8 +7808,6 @@ fieldset:disabled a.btn {
     border-radius: 0;
   }
 }
-
-
 /* Extracted from bootstrap 4.1.3 */
 .card {
   position: relative;
@@ -7956,15 +7927,11 @@ fieldset:disabled a.btn {
   border-bottom-right-radius: calc(0.25rem - 1px);
   border-bottom-left-radius: calc(0.25rem - 1px);
 }
-
-
 .clearfix::after {
   display: block;
   clear: both;
   content: "";
-}
-
-.float-left {
+}.float-left {
   float: left;
 }
 
@@ -7975,8 +7942,6 @@ fieldset:disabled a.btn {
 .float-none {
   float: none;
 }
-
-
 /* My adjustments to bootstrap 4.1.3 css classes */
 a {
   color: #007bff;
@@ -7987,8 +7952,6 @@ a {
 /* Link is hacked to be compatible with bootstrap 
 classes remove it if the TW core objects break
 */
-
-
 
 .shadow-sm {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
@@ -8004,9 +7967,7 @@ classes remove it if the TW core objects break
 
 .shadow-none {
   box-shadow: none !important;
-}
-
-/* Extracted from bootstrap 4.3.1 */
+}/* Extracted from bootstrap 4.3.1 */
 /*Defines margins, paddings, width and height*/
 .w-25 {
   width: 25% !important;
@@ -8341,8 +8302,6 @@ classes remove it if the TW core objects break
 .mx-auto {
   margin-left: auto !important;
 }
-
-
 .text-justify {
   text-align: justify !important;
 }
@@ -8367,9 +8326,7 @@ classes remove it if the TW core objects break
 
 .text-center {
   text-align: center !important;
-}
-
-/* from bootstrap 4.1.3 */
+}/* from bootstrap 4.1.3 */
 
 .text-white {
   color: #fff !important;
@@ -8462,8 +8419,6 @@ a.text-dark:hover, a.text-dark:focus {
   background-color: transparent;
   border: 0;
 }
-
-
 /* Can be removed latter. This is used for illustration of bootstrap cards */
 
 .text-lowercase {
@@ -8572,8 +8527,6 @@ a.text-dark:hover, a.text-dark:focus {
   padding: 0.2em;
   background-color: #fcf8e3;
 }
-
-
 /* Resolve issue for floating objects which cross the tiddler frame!
 The below code should force the tiddler to always wrap around floating elements, so that they are always inside
 Ref: https://groups.google.com/d/msg/tiddlywiki/5bZwwj6cyac/2LzFeA7AAwAJ
@@ -8588,17 +8541,13 @@ Ref: https://groups.google.com/d/msg/tiddlywiki/5bZwwj6cyac/2LzFeA7AAwAJ
 }
 .tc-tiddler-body {
     zoom: 1;
-}
-
-.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected {
+}.tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected {
     background: none;
     border: none;
     border-bottom: solid 1px #737373 !important;
     font-weight: bold;
     color: #DB4C3F !important;
-}
-
-/*Credits: 
+}/*Credits: 
 Nishant Srivastava https://codepen.io/nisrulz/pen/bpQWLW
 Mohammad Rahmani: https://github.com/kookma
 */
@@ -8633,9 +8582,7 @@ Mohammad Rahmani: https://github.com/kookma
 .dbadge-warning {
     background-color: #f0ad4e;}
 .dbadge-danger {
-    background-color: #d9534f;}
-
-/*details html5 macro*/
+    background-color: #d9534f;}/*details html5 macro*/
 details > summary {
   padding: 2px 6px;
   font-weight:500;
@@ -8649,9 +8596,7 @@ details > div {
 button .kk-sh-slider svg{
 width: 0.8em;
 height: 0.8em;
-vertical-align: middle;}
-
-/* these are dynamic or variable properties based on the tiddlywiki palette */.shiraz-dtable-page-footer select{
+vertical-align: middle;}/* these are dynamic or variable properties based on the tiddlywiki palette */.shiraz-dtable-page-footer select{
   background-color: #f0f0f0;
   color:#333333;
 }.shiraz-dtable-page-footer > td{
@@ -8661,8 +8606,6 @@ background-color: #f0f0f0;
 	background-color: #a8a8a8;
   border:none;
 }
-
-
 /* edit-text box for dynamic table */
 .shiraz-dtable-textbox {
     width:100%;
@@ -8726,8 +8669,6 @@ table thead .tbl-delete-confirm > th > button {
 .shiraz-dtable-page-footer button svg {height:0.7em;}
 .shiraz-dtable-page-footer button {outline: none;}
 .shiraz-dtable-page-footer button:disabled {display:none;}
-
-
 /*Image aligning classes*/
 .image-align-right{
     float:right;
@@ -8744,17 +8685,13 @@ table thead .tbl-delete-confirm > th > button {
 
 .image-float-none {
   float: none !important;
-}
-
-.image-simple {
+}.image-simple {
   text-align: center;
   font-style: italic;
   font-size: smaller;
   text-indent: 0;
   padding: 0.5em;
-}
-
-.image-overlay-container{
+}.image-overlay-container{
   width: 50%; 
   box-sizing: border-box;
 }
@@ -8859,9 +8796,7 @@ table thead .tbl-delete-confirm > th > button {
 
 .image-overlay-fadeIn-right{
   left: 80%;
-}
-
-.image-polaroid {
+}.image-polaroid {
   min-width:64px;
   background-color: #f8f9fa;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -8877,9 +8812,7 @@ table thead .tbl-delete-confirm > th > button {
     line-height: 1.4em;
     font-weight:300;
     font-size: 0.9em; 
-}
-
-.image-pretty {
+}.image-pretty {
     min-width:64px;
     border: 1px solid #c8ccd1;
     background-color:#f8f9fa;
@@ -8899,8 +8832,6 @@ table thead .tbl-delete-confirm > th > button {
     font-weight:300;
     font-size: 0.9em; 
 }
-
-
 
 .image-slidein { 
   display: block; 
@@ -8965,8 +8896,6 @@ table thead .tbl-delete-confirm > th > button {
 .mr-cap-bottom:before { bottom: 10px; left: 10px; }
 .mr-cap-bottom figcaption { left: 0; bottom: -30%;}
 .mr-cap-bottom:hover figcaption { bottom: 0; }
-
-
 /* These css rules makes TW UI buttons in beatiful color */
 
 /*page control buttons*/
@@ -8976,8 +8905,6 @@ table thead .tbl-delete-confirm > th > button {
 /*tiddler buttons in beautiful color*/
 .tc-tiddler-controls .tc-image-edit-button { fill:#F37B1D; }/*edit tiddler*/
 .tc-tiddler-controls .tc-image-info-button { fill: #0e90d2; } /*Info button*/
-
-
 .mono {
 	color:unset;
 	background-color: #f7f7f9;
@@ -8986,9 +8913,7 @@ table thead .tbl-delete-confirm > th > button {
 	padding: 0 3px 2px;
 	border-radius: 3px;
 	font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
-}
-
-/* multicolumn layouts with fixed column number works on the whole tiddler */
+}/* multicolumn layouts with fixed column number works on the whole tiddler */
 .multicol .tc-tiddler-body {
   column-width: 14em;
   column-rule: 1px solid #ccc;
@@ -9030,9 +8955,7 @@ table thead .tbl-delete-confirm > th > button {
 /* remove the extra space from first paragraph */
 .sh-multicol  > :first-child,
 .sh-multicol2 > :first-child,
-.sh-multicol3 > :first-child { margin-top: 0;}
-
-/* multicolumn layout using flexbox courtesy from Bootstrap 4.3.1*/
+.sh-multicol3 > :first-child { margin-top: 0;}/* multicolumn layout using flexbox courtesy from Bootstrap 4.3.1*/
 .flex-row {
    display: flex;
    flex-direction: row;
@@ -9082,9 +9005,7 @@ https://getbootstrap.com/docs/4.3/layout/grid/
 .flex-no-gutters {
   margin-right: 0;
   margin-left: 0;
-}
-
-@media print{
+}@media print{
   .notebook .tc-tiddler-body {
     padding-left:60px;
     margin-top:25px;
@@ -9149,9 +9070,7 @@ https://getbootstrap.com/docs/4.3/layout/grid/
 {
   font-family: "Handlee", cursive;
   font-weight:300;
-}
-
-/* Colors taked from [1] https://www.bg-w3schools.bg-com/colors/colors_names.bg-asp 
+}/* Colors taked from [1] https://www.bg-w3schools.bg-com/colors/colors_names.bg-asp 
 [2] http://www.bg-workwithcolor.bg-com/color-chart-full-01.bg-htm*/
 /*Low tone background colors*/
 .bg-mistyrose{background-color:#ffe4e1;}
@@ -9164,9 +9083,7 @@ https://getbootstrap.com/docs/4.3/layout/grid/
 .bg-cornsilk{background-color:#fff8dc;}
 .bg-gainsboro{background-color:#dcdcdc;}
 .bg-bisque{background-color:#ffe4c4;}
-.bg-snow{background-color:#fffafa;}
-
-.sticky-footer {
+.bg-snow{background-color:#fffafa;}.sticky-footer {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -9178,8 +9095,6 @@ https://getbootstrap.com/docs/4.3/layout/grid/
   box-sizing: border-box;
   width: 100%;
 }
-
-
 .table-tight{
 	font-size:0.8em;
 }
@@ -9267,8 +9182,6 @@ April 13, 2018
 .thead-danger th .tc-tiddlylink, .thead-primary th a,
 .thead-info th .tc-tiddlylink, .thead-primary th a,
 .thead-dark th .tc-tiddlylink, .thead-primary th a{color:#ffffff}
-
-
 .title-primary .tc-title {
   color: #007bff;
 }
@@ -9295,9 +9208,7 @@ April 13, 2018
 }
 .title-white .tc-title {
   color: #fff;
-}
-
-/* The \rules pragma at the top of the tiddler restricts the WikiText 
+}/* The \rules pragma at the top of the tiddler restricts the WikiText 
  * to just allow macros and transclusion. This avoids mistakenly 
  * triggering unwanted WikiText processing.
  * 
@@ -9316,9 +9227,7 @@ April 13, 2018
 .ect-block-dropdown li[patt-selected="true"] mark {
     background: hsl(86, 100%, 21%);
     color: inherit;
-}
-
-.tb-inc-controls{
+}.tb-inc-controls{
 margin-top:-2em;
 padding: 5px;
 display:none;
@@ -9337,9 +9246,7 @@ top:0;
 .tb-inc:hover > .tb-inc-controls{
 display:block;
 float:right;
-}
-
-/* Top and bottom bars *//* Hide the top-right bar */
+}/* Top and bottom bars *//* Hide the top-right bar */
 .tc-topbar.tc-topbar-right {
   display: none;
 }div.tc-sidebar-header {
@@ -9716,10 +9623,6 @@ float:right;
   color: #acacac;
   font-size: .8em;
 }
-
-
-
-
 .home-page-sec {h4;}
 .list-hat {margin-top:3em; margin-bottom:0.2em; list-style-type: none;}
 .list-hat li:before {    
@@ -9790,4 +9693,3 @@ a:visited {
   padding: 0.5rem;
   color: inherit;
 }
-
