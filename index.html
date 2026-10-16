@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fortunat Rajaona — researcher in formal methods, secure systems, privacy, and verification.">
+  <meta name="theme-color" content="#132a36">
+  <title>Fortunat Rajaona — Researcher in Formal Methods</title>
+  <style>
+    :root {
+      --ink: #303942;
+      --muted: #68747d;
+      --paper: #f7f8fa;
+      --panel: #fff;
+      --line: #d6dadd;
+      --navy: #3f5362;
+      --teal: #3f6f95;
+      --teal-soft: #edf3f8;
+      --orange: #bd7042;
+      --shadow: 0 2px 8px rgba(44, 56, 66, .08);
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font: 15px/1.6 Arial, Helvetica, sans-serif;
+    }
+    a { color: var(--teal); text-decoration-thickness: .08em; text-underline-offset: .16em; }
+    a:hover { color: var(--orange); }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid #f2b26f; outline-offset: 3px; }
+    .shell { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+    .topbar { position: sticky; top: 0; z-index: 10; background: #fff; border-bottom: 1px solid #cfd4d8; }
+    .titlebar { min-height: 62px; display: flex; align-items: center; justify-content: space-between; gap: 22px; }
+    .brand { color: #425464; text-decoration: none; font: 700 27px/1.1 Georgia, "Times New Roman", serif; letter-spacing: -.02em; }
+    .brand small { display: block; margin-top: 4px; color: #7a858d; font: 11px/1.2 Arial, Helvetica, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+    .site-state { color: #7a858d; font-size: 13px; }
+    .nav-strip { background: #edf0f2; border-top: 1px solid #e0e3e5; border-bottom: 1px solid #d1d5d8; }
+    nav { display: flex; align-items: center; flex-wrap: wrap; gap: 0; }
+    nav a { color: #4e5d68; text-decoration: none; padding: 8px 14px; border-right: 1px solid #d7dbde; font-size: 14px; }
+    nav a:first-child { border-left: 1px solid #d7dbde; }
+    nav a:hover, nav a[aria-current="page"] { color: #294d6b; background: #fff; }
+
+    .intro { padding: 22px 0 20px; }
+    .eyebrow { color: var(--muted); font: 700 11px/1.2 Arial, Helvetica, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+    h1, h2, h3 { color: var(--navy); line-height: 1.2; letter-spacing: -.015em; }
+    h1 { max-width: 800px; margin: 7px 0 8px; font: 700 28px/1.15 Georgia, "Times New Roman", serif; }
+    .lede { max-width: 720px; margin: 0; color: #4e5b64; font-size: 16px; line-height: 1.5; }
+    .intro-photo { display: flex; justify-content: center; align-items: flex-start; margin-bottom: 16px; }
+    .intro-photo img { width: 150px; height: 165px; object-fit: cover; border: 1px solid var(--line); border-radius: 4px; }
+
+    .layout { display: grid; grid-template-columns: 214px minmax(0, 1fr); gap: 32px; align-items: start; }
+    aside { position: sticky; top: 118px; padding: 12px; background: #f0f2f4; border: 1px solid #d4d9dc; border-radius: 4px; box-shadow: 0 1px 3px rgba(44, 56, 66, .06); }
+    .side-label { margin: 0 0 10px; color: #53636e; font: 700 12px/1.2 Arial, Helvetica, sans-serif; letter-spacing: .03em; }
+    .toc { margin: 0; padding: 0; list-style: none; border: 1px solid #d4d9dc; background: #fff; }
+    .toc li + li { border-top: 1px solid #e2e5e7; }
+    .toc li a { display: block; padding: 7px 10px; color: #586771; text-decoration: none; font-size: 14px; }
+    .toc li a:hover, .toc li a.active { color: #294d6b; border-left: 3px solid var(--teal); padding-left: 7px; background: var(--teal-soft); }
+
+    main { min-width: 0; }
+    .tiddler { scroll-margin-top: 118px; margin: 0 0 18px; background: var(--panel); border: 1px solid #d2d7da; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+    .tiddler-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 12px 16px 10px; border-bottom: 1px solid #d2d7da; background: linear-gradient(#f8f9fa, #eef1f3); }
+    .tiddler-head h2 { margin: 0; font-size: 19px; }
+    .tiddler-meta { margin-top: 3px; color: #7b858c; font: 11px/1.35 Arial, Helvetica, sans-serif; }
+    .tiddler-body { padding: 16px; }
+    .tiddler-body > :first-child { margin-top: 0; }
+    .tiddler-body > :last-child { margin-bottom: 0; }
+    h3 { margin: 28px 0 6px; font-size: 18px; }
+    p { margin: 10px 0; }
+    .muted { color: var(--muted); }
+    .callout { margin: 0 0 16px; padding: 12px 14px; border-left: 3px solid var(--teal); background: var(--teal-soft); }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .award-card { height: 100%; padding: 14px; border: 1px solid var(--line); border-radius: 4px; background: #fafbfc; }
+    .award-card h3 { margin: 0 0 7px; font-size: 17px; }
+    .award-card p { margin: 0; color: #4b5c62; font-size: 14px; line-height: 1.55; }
+    .project-list { display: grid; gap: 16px; }
+    .project-card { padding: 14px; border: 1px solid var(--line); border-radius: 4px; background: #fafbfc; }
+    .project-card h3 { margin: 0 0 7px; font-size: 17px; }
+    .project-context { font-size: 13px; font-weight: 400; color: var(--muted); }
+    .project-card p { margin: 10px 0; color: #4b5c62; font-size: 14px; line-height: 1.55; }
+    .project-card ul { margin: 8px 0; padding-left: 19px; color: #4b5c62; font-size: 14px; line-height: 1.55; }
+    .project-card li::marker { color: var(--teal); }
+    .timeline { margin: 0; padding: 0; list-style: none; }
+    .timeline > li { display: grid; grid-template-columns: 122px minmax(0, 1fr); gap: 18px; padding: 0 0 22px; }
+    .timeline > li:last-child { padding-bottom: 0; }
+    .timeline time { color: var(--orange); font: 700 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .timeline article { position: relative; padding-left: 20px; border-left: 1px solid var(--line); }
+    .timeline article::before { content: ""; position: absolute; left: -5px; top: 5px; width: 9px; height: 9px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft); }
+    .timeline h3 { margin: 0 0 3px; font-size: 17px; letter-spacing: -.02em; }
+    .timeline p { margin: 2px 0 8px; color: var(--muted); font-size: 14px; }
+    .timeline ul, .plain-list { margin: 8px 0 0; padding-left: 19px; }
+    .timeline ul li { display: list-item; padding: 0; color: #4b5c62; font-size: 14px; }
+    .timeline li li::marker { color: var(--teal); }
+    .pubs { margin: 0; padding: 0; list-style: none; counter-reset: publications; }
+    .pubs > li { counter-increment: publications; display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 10px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .pubs > li:last-child { padding-bottom: 0; border-bottom: 0; }
+    .pubs > li::before { content: counter(publications, decimal-leading-zero); color: var(--orange); font: 700 12px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .pub-title { display: block; font-weight: 700; line-height: 1.42; }
+    .pub-meta { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; }
+    .contact-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 25px; }
+    .button { display: inline-block; padding: 8px 12px; color: #fff; background: var(--teal); border-radius: 4px; text-decoration: none; font-size: 14px; }
+    .button:hover { color: #fff; background: var(--teal); }
+    footer { padding: 26px 0 50px; color: var(--muted); font-size: 13px; }
+    footer span { color: var(--orange); }
+
+    @media (max-width: 780px) {
+      .titlebar { align-items: flex-start; padding: 13px 0; flex-direction: column; gap: 7px; }
+      nav { width: 100%; overflow-x: auto; flex-wrap: nowrap; }
+      nav a { white-space: nowrap; padding-left: 7px; padding-right: 7px; }
+      .intro { padding: 20px 0 18px; }
+      .layout { grid-template-columns: 1fr; gap: 20px; }
+      aside { position: static; }
+      .toc { display: flex; overflow-x: auto; border: 0; gap: 5px; }
+      .toc li { flex: 0 0 auto; }
+      .toc li a { border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; }
+      .toc li a:hover, .toc li a.active { border: 1px solid var(--teal); margin: 0; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .timeline > li { grid-template-columns: 1fr; gap: 5px; }
+      .timeline article { padding-left: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell titlebar">
+      <a class="brand" href="#top">Fortunat Rajaona<small>Researcher in formal methods &amp; secure systems</small></a>
+    </div>
+    <div class="nav-strip">
+      <div class="shell">
+        <nav aria-label="Primary navigation">
+          <a href="#research">Research</a>
+          <a href="#projects">Projects</a>
+          <a href="#publications">Publications</a>
+          <a href="#experience">Experience</a>
+          <a href="#position">Current position</a>
+          <a href="#teaching">Teaching</a>
+          <a href="#education">Education</a>
+          <a href="#recognition">Recognition</a>
+          <a href="#about">My academic adventure</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell" id="top">
+    <div class="layout">
+      <aside aria-label="On this page">
+        <div class="intro-photo">
+          <img src="rajaona2.jpeg" alt="Fortunat Rajaona">
+        </div>
+        <p class="side-label">Contents</p>
+        <ul class="toc">
+          <li><a href="#research">Research</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#position">Current position</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#recognition">Recognition</a></li>
+          <li><a href="#about">My academic adventure</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </aside>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <h1 id="page-title">Welcome</h1>
+          <p class="lede">I am a researcher in formal methods and secure systems. I develop mathematical models and automated tools, and apply them to analyse real-world systems, with a focus on privacy, security, knowledge, and coordination in complex systems.</p>
+        </section>
+
+        <section class="tiddler" id="research" data-section="research">
+          <div class="tiddler-head"><div><h2>Research</h2></div></div>
+          <div class="tiddler-body">
+            <p class="callout">My research sits at the intersection of <strong>formal verification</strong>, <strong>applied cryptography</strong>, and <strong>multi-agent systems</strong>. I use logic, semantics, model checking, and automated reasoning to make security and privacy claims precise, so that they can be stated rigorously, analysed systematically, and supported by formal evidence.</p>
+          </div>
+        </section>
+
+        <section class="tiddler" id="projects" data-section="projects">
+          <div class="tiddler-head"><div><h2>Projects</h2></div></div>
+          <div class="tiddler-body project-list">
+            <article class="project-card"><h3>AUTOPASS Project <span class="project-context">(led by Prof Ioana Boureanu; EPSRC-funded, 2020–2022)</span></h3><p>I developed a framework for reasoning about and analysing privacy in cryptographic protocols. It included:</p><ul><li>Designing a protocol model and a non-classical logic language for specifying privacy properties.</li><li>Building <strong>Phoebe</strong>, a model-checking tool implementing the framework.</li><li>Analysing benchmark privacy-preserving protocols.</li></ul><p>In 2024, the project received an <strong>Amazon Research Award</strong> to further enhance Phoebe. I co-authored several conference papers, including <a href="https://doi.org/10.1109/CSF61375.2024.00020" target="_blank" rel="noreferrer">the Phoebe paper presented at CSF 2024</a>; our work on epistemic logic and AI reasoning received the <a href="https://doi.org/10.1007/978-3-031-27481-7_27" target="_blank" rel="noreferrer">Best Paper Award at FM 2023</a>.</p></article>
+            <article class="project-card"><h3>ESKMARALD Project <span class="project-context">(led by Prof Ioana Boureanu; NCSC-funded, 2023–2024)</span></h3><p>I investigated the security and privacy of the <strong>3GPP AKMA protocol standard</strong>. Our work involved:</p><ul><li>Formalising security and privacy requirements for AKMA.</li><li>Using formal verification tools such as <strong>Tamarin</strong> and <strong>Squirrel Prover</strong> to uncover privacy flaws.</li><li>Proposing a privacy-enhanced version of AKMA.</li></ul><p>This research resulted in two publications: <a href="https://doi.org/10.1109/EuroSP63326.2025.00010" target="_blank" rel="noreferrer">privacy analysis of AKMA</a> at IEEE EuroS&amp;P 2025 and <a href="https://doi.org/10.1145/3708821.3733910" target="_blank" rel="noreferrer">post-compromise security of AKMA</a> at ACM ASIACCS 2025.</p></article>
+            <article class="project-card"><h3>Future of Digital Power of Attorney (dPOA) <span class="project-context">(led by Prof Helen Treharne; 2025–present)</span></h3><p>Our current project explores the digitalisation of power-of-attorney schemes. We study:</p><ul><li>Risks of fraud introduced by digitalisation.</li><li>Opportunities to mitigate existing fraud and abuse in traditional systems.</li><li>Usability challenges for vulnerable individuals, such as older people, who may require third-party digital assistance.</li></ul><p><strong>Output:</strong> <a href="https://doi.org/10.1007/978-3-032-38708-0_6" target="_blank" rel="noreferrer">Verifiable Digital Power of Attorney under Strategic Adversaries: Correctness, Delegation, and Fraud Detection under Collusion</a> · ESORICS 2026.</p></article>
+          </div>
+        </section>
+
+        <section class="tiddler" id="publications" data-section="publications">
+          <div class="tiddler-head"><div><h2>Selected publications</h2></div></div>
+          <div class="tiddler-body">
+            <ol class="pubs">
+              <li><div><a class="pub-title" href="https://doi.org/10.1007/978-3-032-38708-0_6" target="_blank" rel="noreferrer">Verifiable Digital Power of Attorney under Strategic Adversaries: Correctness, Delegation, and Fraud Detection under Collusion</a><span class="pub-meta">Ioana Boureanu, <strong>Fortunat Rajaona</strong>, Sasa Radomirovic, Daniel Gardham, Helen Treharne · ESORICS 2026</span></div></li>
+              <li><div><a class="pub-title" href="https://doi.org/10.1109/EuroSP63326.2025.00010" target="_blank" rel="noreferrer">A Systematic Study of Practical &amp; Formal Privacy in the 5G AKMA Procedure</a><span class="pub-meta">Ioana Boureanu, Steve Wesemeyer, <strong>Fortunat Rajaona</strong>, Steve Schneider, Helen Treharne · IEEE EuroS&amp;P 2025</span></div></li>
+              <li><div><a class="pub-title" href="https://doi.org/10.1145/3700150" target="_blank" rel="noreferrer">An SMT-based approach to the verification of knowledge-based programs</a><span class="pub-meta">Francesco Belardinelli, Ioana Boureanu, Vadim Malvone, <strong>Fortunat Rajaona</strong> · Formal Aspects of Computing, 2024</span></div></li>
+              <li><div><a class="pub-title" href="https://ieeexplore.ieee.org/document/10664325/" target="_blank" rel="noreferrer">Epistemic Model Checking for Privacy</a><span class="pub-meta"><strong>Fortunat Rajaona</strong>, Ioana Boureanu, Ramaswamy Ramanujam, Steve Wesemeyer · IEEE CSF 2024</span></div></li>
+              <li><div><a class="pub-title" href="https://doi.org/10.1007/978-3-031-27481-7_27" target="_blank" rel="noreferrer">Program Semantics and Verification Technique for AI-centred Programs</a><span class="pub-meta"><strong>Fortunat Rajaona</strong>, Ioana Boureanu, Vadim Malvone, Francesco Belardinelli · FM 2023 · <strong>Best Paper Award</strong></span></div></li>
+              <li><div><a class="pub-title" href="https://doi.org/10.14722/ndss.2023.23289" target="_blank" rel="noreferrer">Fine-Grained Trackability in Protocol Executions</a><span class="pub-meta">Ksenia Budykho, Ioana Boureanu, Steve Wesemeyer, <strong>Fortunat Rajaona</strong> et al. · NDSS 2023</span></div></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="tiddler" id="experience" data-section="experience">
+          <div class="tiddler-head"><div><h2>Research experience</h2></div></div>
+          <div class="tiddler-body">
+            <ol class="timeline">
+              <li><time>2025 → now</time><article><h3>Research Fellow in Secure Systems</h3><p>Surrey Centre for Cyber Security · University of Surrey, UK</p></article></li>
+              <li><time>2020 → 2024</time><article><h3>Research Fellow in Formal Verification of Privacy</h3><p>Surrey Centre for Cyber Security · University of Surrey, UK</p></article></li>
+              <li><time>2016 → 2017</time><article><h3>Visiting Researcher</h3><p>RWTH Aachen University, MOVES group · Germany</p></article></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="tiddler" id="position" data-section="position">
+          <div class="tiddler-head"><div><h2>Current position</h2></div></div>
+          <div class="tiddler-body">
+            <p><strong>Research Fellow in Secure Systems</strong><br>Surrey Centre for Cyber Security<br>University of Surrey, UK</p>
+          </div>
+        </section>
+
+        <section class="tiddler" id="teaching" data-section="teaching">
+          <div class="tiddler-head"><div><h2>Teaching experience</h2></div></div>
+          <div class="tiddler-body">
+            <ol class="timeline">
+              <li><time>2020 → now</time><article><h3>Research Fellow and MSc Supervisor</h3><p>University of Surrey · Guildford, Surrey, UK</p></article></li>
+              <li><time>2018 → 2019</time><article><h3>Contractual Lecturer</h3><p>École Normale Supérieure, University of Antananarivo · Madagascar</p></article></li>
+              <li><time>2013 → 2015</time><article><h3>Teaching Assistant</h3><p>University of Cape Town · South Africa</p></article></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="tiddler" id="education" data-section="education">
+          <div class="tiddler-head"><div><h2>Education</h2></div></div>
+          <div class="tiddler-body">
+            <ol class="timeline">
+              <li><time>2013 → 2016</time><article><h3>PhD in Mathematics</h3><p>University of Stellenbosch · South Africa</p></article></li>
+              <li><time>2011 → 2013</time><article><h3>MSc in Computer Science</h3><p>University of Stellenbosch · South Africa</p></article></li>
+              <li><time>2010 → 2011</time><article><h3>Postgraduate Diploma in Mathematical Sciences</h3><p>African Institute for Mathematical Sciences · South Africa</p></article></li>
+              <li><time>2006 → 2009</time><article><h3>BSc in Mathematics</h3><p>University of Antananarivo · Madagascar</p></article></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="tiddler" id="recognition" data-section="recognition">
+          <div class="tiddler-head"><div><h2>Recognition</h2></div></div>
+          <div class="tiddler-body grid-2">
+            <article class="award-card"><h3>Amazon Research Award</h3><p>2024 · Phoebe+: automated reasoning for provable privacy in cryptographic systems.</p></article>
+            <article class="award-card"><h3>Best Paper Award</h3><p>2023 · FM 2023 for work on semantics and verification of AI-centred programs.</p></article>
+          </div>
+        </section>
+
+        <section class="tiddler" id="about" data-section="about">
+          <div class="tiddler-head"><div><h2>My academic adventure</h2></div></div>
+          <div class="tiddler-body">
+            <p>I grew up in Madagascar and chose Mathematics because it was my favourite subject at school. I especially enjoyed geometry, probability, mechanics, mathematical puzzles, and jokes. I began my undergraduate studies at the University of Antananarivo in 2006.</p>
+            <p>After completing my first degree in 2009, I was selected for the <a href="https://www.aims.ac.za/structured-masters-program/" target="_blank" rel="noreferrer">AIMS programme</a> in South Africa. Meeting students and lecturers from across Africa, Europe, and America opened up a new international academic world to me. I stayed in South Africa for my MSc and PhD, working with Jeff Sanders on formal methods, knowledge, and privacy. I received a full DAAD scholarship for my PhD.</p>
+            <p>In 2016, I moved to Germany and joined the <a href="https://moves.rwth-aachen.de/" target="_blank" rel="noreferrer">MOVES group at RWTH Aachen University</a> as a visiting researcher, where I worked on probabilistic programming and reasoning about knowledge and information flow. After returning to Madagascar, I taught Mathematics and Programming at the École Normale Supérieure in Antananarivo from 2018 to 2019.</p>
+            <p>In 2020, I joined the University of Surrey, where I continue the adventure as a researcher in formal methods and secure systems.</p>
+            <p class="muted">Beyond research, I remain interested in holistic education and education and development in Africa.</p>
+          </div>
+        </section>
+
+        <section class="tiddler" id="contact" data-section="contact">
+          <div class="tiddler-head"><div><h2>Contact</h2></div></div>
+          <div class="tiddler-body">
+            <p class="muted">Fortunat Rajaona, Ph.D. · Surrey Centre for Cyber Security · University of Surrey, Guildford, UK</p>
+            <div class="contact-row"><span>s.{my_surname}.surrey.ac.uk</span><a href="https://www.surrey.ac.uk/people/solofomampionona-fortunat-rajaona" target="_blank" rel="noreferrer">University of Surrey ↗</a></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>© Fortunat Rajaona</footer>
+  </div>
+
+  <script>
+    const sections = [...document.querySelectorAll('[data-section]')];
+    const links = [...document.querySelectorAll('.toc a, nav a')];
+    const setActive = () => {
+      const current = sections.reduce((best, section) => {
+        const distance = Math.abs(section.getBoundingClientRect().top - 120);
+        return distance < best.distance ? { id: section.id, distance } : best;
+      }, { id: 'research', distance: Infinity }).id;
+      document.querySelectorAll('.toc a').forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + current));
+      links.forEach(link => link.toggleAttribute('aria-current', link.getAttribute('href') === '#' + current));
+    };
+    window.addEventListener('scroll', setActive, { passive: true });
+    window.addEventListener('hashchange', setActive);
+    setActive();
+  </script>
+</body>
+</html>
