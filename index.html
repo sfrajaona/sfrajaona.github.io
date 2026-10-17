@@ -50,7 +50,7 @@
     h1 { max-width: 800px; margin: 7px 0 8px; font: 700 28px/1.15 Georgia, "Times New Roman", serif; }
     .lede { max-width: 720px; margin: 0; color: #4e5b64; font-size: 16px; line-height: 1.5; }
     .intro-photo { display: flex; justify-content: center; align-items: flex-start; margin-bottom: 16px; }
-    .intro-photo img { width: 150px; height: 165px; object-fit: cover; border: 1px solid var(--line); border-radius: 4px; }
+    .intro-photo img { width: 150px; height: 165px; object-fit: cover; object-position: center 25%; border: 1px solid var(--line); border-radius: 4px; }
 
     .layout { display: grid; grid-template-columns: 214px minmax(0, 1fr); gap: 32px; align-items: start; }
     aside { position: sticky; top: 118px; padding: 12px; background: #f0f2f4; border: 1px solid #d4d9dc; border-radius: 4px; box-shadow: 0 1px 3px rgba(44, 56, 66, .06); }
@@ -71,7 +71,6 @@
     h3 { margin: 28px 0 6px; font-size: 18px; }
     p { margin: 10px 0; }
     .muted { color: var(--muted); }
-    .callout { margin: 0 0 16px; padding: 12px 14px; border-left: 3px solid var(--teal); background: var(--teal-soft); }
     .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
     .award-card { height: 100%; padding: 14px; border: 1px solid var(--line); border-radius: 4px; background: #fafbfc; }
     .award-card h3 { margin: 0 0 7px; font-size: 17px; }
@@ -81,8 +80,6 @@
     .project-card h3 { margin: 0 0 7px; font-size: 17px; }
     .project-context { font-size: 13px; font-weight: 400; color: var(--muted); }
     .project-card p { margin: 10px 0; color: #4b5c62; font-size: 14px; line-height: 1.55; }
-    .project-card ul { margin: 8px 0; padding-left: 19px; color: #4b5c62; font-size: 14px; line-height: 1.55; }
-    .project-card li::marker { color: var(--teal); }
     .timeline { margin: 0; padding: 0; list-style: none; }
     .timeline > li { display: grid; grid-template-columns: 122px minmax(0, 1fr); gap: 18px; padding: 0 0 22px; }
     .timeline > li:last-child { padding-bottom: 0; }
@@ -94,12 +91,21 @@
     .timeline ul, .plain-list { margin: 8px 0 0; padding-left: 19px; }
     .timeline ul li { display: list-item; padding: 0; color: #4b5c62; font-size: 14px; }
     .timeline li li::marker { color: var(--teal); }
-    .pubs { margin: 0; padding: 0; list-style: none; counter-reset: publications; }
-    .pubs > li { counter-increment: publications; display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 10px; padding: 14px 0; border-bottom: 1px solid var(--line); }
-    .pubs > li:last-child { padding-bottom: 0; border-bottom: 0; }
-    .pubs > li::before { content: counter(publications, decimal-leading-zero); color: var(--orange); font: 700 12px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; }
-    .pub-title { display: block; font-weight: 700; line-height: 1.42; }
+    .pubs { margin: 0; padding: 0; list-style: none; }
+    .pubs > li { display: grid; grid-template-columns: 122px minmax(0, 1fr); gap: 18px; padding: 0 0 22px; }
+    .pubs > li:last-child { padding-bottom: 0; }
+    .pub-label { color: var(--orange); font: 700 12px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: nowrap; }
+    .pub-title { font-weight: 700; line-height: 1.42; }
+    .pub-title:hover { color: var(--orange); }
+    .pub-award { display: block; margin-top: 4px; color: var(--orange); font-size: 13px; font-weight: 700; }
     .pub-meta { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; }
+    .pubs-note { margin: 0 0 18px; color: var(--muted); font-size: 14px; }
+    .recognition-list { margin: 0; padding: 0; list-style: none; }
+    .recognition-list > li { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 10px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .recognition-list > li:last-child { padding-bottom: 0; border-bottom: 0; }
+    .recognition-list time { color: var(--orange); font: 700 12px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .recognition-list h3 { margin: 0 0 4px; font-size: 17px; }
+    .recognition-list p { margin: 0; color: #4b5c62; font-size: 14px; line-height: 1.55; }
     .contact-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 25px; }
     .button { display: inline-block; padding: 8px 12px; color: #fff; background: var(--teal); border-radius: 4px; text-decoration: none; font-size: 14px; }
     .button:hover { color: #fff; background: var(--teal); }
@@ -119,6 +125,7 @@
       .toc li a:hover, .toc li a.active { border: 1px solid var(--teal); margin: 0; }
       .grid-2 { grid-template-columns: 1fr; }
       .timeline > li { grid-template-columns: 1fr; gap: 5px; }
+      .pubs > li { grid-template-columns: 1fr; gap: 5px; }
       .timeline article { padding-left: 16px; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -135,9 +142,8 @@
           <a href="#research">Research</a>
           <a href="#projects">Projects</a>
           <a href="#publications">Publications</a>
-          <a href="#experience">Experience</a>
-          <a href="#position">Current position</a>
-          <a href="#teaching">Teaching</a>
+          <a href="#experience">Research experience</a>
+          <a href="#teaching">Teaching experience</a>
           <a href="#education">Education</a>
           <a href="#recognition">Recognition</a>
           <a href="#about">My academic adventure</a>
@@ -151,16 +157,15 @@
     <div class="layout">
       <aside aria-label="On this page">
         <div class="intro-photo">
-          <img src="rajaona2.jpeg" alt="Fortunat Rajaona">
+          <img src="rajaona.jpeg" alt="Fortunat Rajaona">
         </div>
         <p class="side-label">Contents</p>
         <ul class="toc">
           <li><a href="#research">Research</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#publications">Publications</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#position">Current position</a></li>
-          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#experience">Research experience</a></li>
+          <li><a href="#teaching">Teaching experience</a></li>
           <li><a href="#education">Education</a></li>
           <li><a href="#recognition">Recognition</a></li>
           <li><a href="#about">My academic adventure</a></li>
@@ -171,36 +176,37 @@
       <main>
         <section class="intro" aria-labelledby="page-title">
           <h1 id="page-title">Welcome</h1>
-          <p class="lede">I am a researcher in formal methods and secure systems. I develop mathematical models and automated tools, and apply them to analyse real-world systems, with a focus on privacy, security, knowledge, and coordination in complex systems.</p>
+          <p class="lede">I am a researcher in formal methods and secure systems. I develop mathematical models and automated tools, and apply them to analyse real-world systems, with a focus on privacy, security, knowledge, and coordination in complex systems. I am currently a Research Fellow in Secure Systems at the Surrey Centre for Cyber Security, University of Surrey, UK.</p>
         </section>
 
         <section class="tiddler" id="research" data-section="research">
           <div class="tiddler-head"><div><h2>Research</h2></div></div>
           <div class="tiddler-body">
-            <p class="callout">My research sits at the intersection of <strong>formal verification</strong>, <strong>applied cryptography</strong>, and <strong>multi-agent systems</strong>. I use logic, semantics, model checking, and automated reasoning to make security and privacy claims precise, so that they can be stated rigorously, analysed systematically, and supported by formal evidence.</p>
+            <p>My research sits at the intersection of <strong>formal verification</strong>, <strong>applied cryptography</strong>, and <strong>multi-agent systems</strong>. I use logic, semantics, model checking, and automated reasoning to make security and privacy claims precise, rigorous, and verifiable.</p>
           </div>
         </section>
 
         <section class="tiddler" id="projects" data-section="projects">
           <div class="tiddler-head"><div><h2>Projects</h2></div></div>
           <div class="tiddler-body project-list">
-            <article class="project-card"><h3>AUTOPASS Project <span class="project-context">(led by Prof Ioana Boureanu; EPSRC-funded, 2020–2022)</span></h3><p>I developed a framework for reasoning about and analysing privacy in cryptographic protocols. It included:</p><ul><li>Designing a protocol model and a non-classical logic language for specifying privacy properties.</li><li>Building <strong>Phoebe</strong>, a model-checking tool implementing the framework.</li><li>Analysing benchmark privacy-preserving protocols.</li></ul><p>In 2024, the project received an <strong>Amazon Research Award</strong> to further enhance Phoebe. I co-authored several conference papers, including <a href="https://doi.org/10.1109/CSF61375.2024.00020" target="_blank" rel="noreferrer">the Phoebe paper presented at CSF 2024</a>; our work on epistemic logic and AI reasoning received the <a href="https://doi.org/10.1007/978-3-031-27481-7_27" target="_blank" rel="noreferrer">Best Paper Award at FM 2023</a>.</p></article>
-            <article class="project-card"><h3>ESKMARALD Project <span class="project-context">(led by Prof Ioana Boureanu; NCSC-funded, 2023–2024)</span></h3><p>I investigated the security and privacy of the <strong>3GPP AKMA protocol standard</strong>. Our work involved:</p><ul><li>Formalising security and privacy requirements for AKMA.</li><li>Using formal verification tools such as <strong>Tamarin</strong> and <strong>Squirrel Prover</strong> to uncover privacy flaws.</li><li>Proposing a privacy-enhanced version of AKMA.</li></ul><p>This research resulted in two publications: <a href="https://doi.org/10.1109/EuroSP63326.2025.00010" target="_blank" rel="noreferrer">privacy analysis of AKMA</a> at IEEE EuroS&amp;P 2025 and <a href="https://doi.org/10.1145/3708821.3733910" target="_blank" rel="noreferrer">post-compromise security of AKMA</a> at ACM ASIACCS 2025.</p></article>
-            <article class="project-card"><h3>Future of Digital Power of Attorney (dPOA) <span class="project-context">(led by Prof Helen Treharne; 2025–present)</span></h3><p>Our current project explores the digitalisation of power-of-attorney schemes. We study:</p><ul><li>Risks of fraud introduced by digitalisation.</li><li>Opportunities to mitigate existing fraud and abuse in traditional systems.</li><li>Usability challenges for vulnerable individuals, such as older people, who may require third-party digital assistance.</li></ul><p><strong>Output:</strong> <a href="https://doi.org/10.1007/978-3-032-38708-0_6" target="_blank" rel="noreferrer">Verifiable Digital Power of Attorney under Strategic Adversaries: Correctness, Delegation, and Fraud Detection under Collusion</a> · ESORICS 2026.</p></article>
+            <article class="project-card"><h3>Future of Digital Power of Attorney (dPOA) <span class="project-context">(led by Prof Helen Treharne; 2025–present)</span></h3><p>Our current project explores the digitalisation of power-of-attorney schemes, focusing on the risks of fraud introduced by digitalisation, ways to mitigate existing fraud and abuse in traditional systems, and usability challenges for vulnerable individuals who may require third-party digital assistance. The project led to the <a href="#pub-esorics-2026">ESORICS 2026</a> paper.</p></article>
+            <article class="project-card"><h3>ESKMARALD Project <span class="project-context">(led by Prof Ioana Boureanu; NCSC-funded, 2023–2024)</span></h3><p>I investigated the security and privacy of the <strong>3GPP AKMA protocol standard</strong> by formalising its security and privacy requirements, using tools such as <strong>Tamarin</strong> and <strong>Squirrel Prover</strong> to uncover privacy flaws, and proposing a privacy-enhanced version of AKMA.</p><p>This research resulted in two publications: <a href="#pub-eurosp-2025">EuroS&amp;P 2025</a> and <a href="https://doi.org/10.1145/3708821.3733910" target="_blank" rel="noreferrer">ASIACCS 2025</a>.</p></article>
+            <article class="project-card"><h3>AUTOPASS Project <span class="project-context">(led by Prof Ioana Boureanu; EPSRC-funded, 2020–2022)</span></h3><p>I developed a framework for reasoning about and analysing privacy in cryptographic protocols. This involved designing a protocol model and a non-classical logic language for specifying privacy properties, building <strong>Phoebe</strong> as a model-checking tool for the framework, and analysing benchmark privacy-preserving protocols.</p><p>In 2024, the project received an <strong>Amazon Research Award</strong> to further enhance Phoebe. I co-authored several conference papers, including <a href="#pub-csf-2024">CSF 2024</a>; our work on epistemic logic and AI reasoning received the Best Paper Award at <a href="#pub-fm-2023">FM 2023</a>.</p></article>
           </div>
         </section>
 
         <section class="tiddler" id="publications" data-section="publications">
           <div class="tiddler-head"><div><h2>Selected publications</h2></div></div>
           <div class="tiddler-body">
-            <ol class="pubs">
-              <li><div><a class="pub-title" href="https://doi.org/10.1007/978-3-032-38708-0_6" target="_blank" rel="noreferrer">Verifiable Digital Power of Attorney under Strategic Adversaries: Correctness, Delegation, and Fraud Detection under Collusion</a><span class="pub-meta">Ioana Boureanu, <strong>Fortunat Rajaona</strong>, Sasa Radomirovic, Daniel Gardham, Helen Treharne · ESORICS 2026</span></div></li>
-              <li><div><a class="pub-title" href="https://doi.org/10.1109/EuroSP63326.2025.00010" target="_blank" rel="noreferrer">A Systematic Study of Practical &amp; Formal Privacy in the 5G AKMA Procedure</a><span class="pub-meta">Ioana Boureanu, Steve Wesemeyer, <strong>Fortunat Rajaona</strong>, Steve Schneider, Helen Treharne · IEEE EuroS&amp;P 2025</span></div></li>
-              <li><div><a class="pub-title" href="https://doi.org/10.1145/3700150" target="_blank" rel="noreferrer">An SMT-based approach to the verification of knowledge-based programs</a><span class="pub-meta">Francesco Belardinelli, Ioana Boureanu, Vadim Malvone, <strong>Fortunat Rajaona</strong> · Formal Aspects of Computing, 2024</span></div></li>
-              <li><div><a class="pub-title" href="https://ieeexplore.ieee.org/document/10664325/" target="_blank" rel="noreferrer">Epistemic Model Checking for Privacy</a><span class="pub-meta"><strong>Fortunat Rajaona</strong>, Ioana Boureanu, Ramaswamy Ramanujam, Steve Wesemeyer · IEEE CSF 2024</span></div></li>
-              <li><div><a class="pub-title" href="https://doi.org/10.1007/978-3-031-27481-7_27" target="_blank" rel="noreferrer">Program Semantics and Verification Technique for AI-centred Programs</a><span class="pub-meta"><strong>Fortunat Rajaona</strong>, Ioana Boureanu, Vadim Malvone, Francesco Belardinelli · FM 2023 · <strong>Best Paper Award</strong></span></div></li>
-              <li><div><a class="pub-title" href="https://doi.org/10.14722/ndss.2023.23289" target="_blank" rel="noreferrer">Fine-Grained Trackability in Protocol Executions</a><span class="pub-meta">Ksenia Budykho, Ioana Boureanu, Steve Wesemeyer, <strong>Fortunat Rajaona</strong> et al. · NDSS 2023</span></div></li>
-            </ol>
+            <p class="pubs-note">A complete list of my publications is available on <a href="https://dblp.org/pid/323/4722.html" target="_blank" rel="noreferrer">DBLP</a>.</p>
+            <ul class="pubs">
+              <li id="pub-esorics-2026"><span class="pub-label">[ESORICS 2026]</span><div><a class="pub-title" href="https://doi.org/10.1007/978-3-032-38708-0_6" target="_blank" rel="noreferrer">Verifiable Digital Power of Attorney under Strategic Adversaries: Correctness, Delegation, and Fraud Detection under Collusion</a><span class="pub-meta">Ioana Boureanu, <strong>Fortunat Rajaona</strong>, Sasa Radomirovic, Daniel Gardham, Helen Treharne</span></div></li>
+              <li id="pub-eurosp-2025"><span class="pub-label">[EuroS&amp;P 2025]</span><div><a class="pub-title" href="https://doi.org/10.1109/EuroSP63326.2025.00010" target="_blank" rel="noreferrer">A Systematic Study of Practical &amp; Formal Privacy in the 5G AKMA Procedure</a><span class="pub-meta">Ioana Boureanu, Steve Wesemeyer, <strong>Fortunat Rajaona</strong>, Steve Schneider, Helen Treharne</span></div></li>
+              <li><span class="pub-label">[FAC 2024]</span><div><a class="pub-title" href="https://doi.org/10.1145/3700150" target="_blank" rel="noreferrer">An SMT-based approach to the verification of knowledge-based programs</a><span class="pub-meta">Francesco Belardinelli, Ioana Boureanu, Vadim Malvone, <strong>Fortunat Rajaona</strong></span></div></li>
+              <li id="pub-csf-2024"><span class="pub-label">[CSF 2024]</span><div><a class="pub-title" href="https://ieeexplore.ieee.org/document/10664325/" target="_blank" rel="noreferrer">Epistemic Model Checking for Privacy</a><span class="pub-meta"><strong>Fortunat Rajaona</strong>, Ioana Boureanu, Ramaswamy Ramanujam, Steve Wesemeyer</span></div></li>
+              <li id="pub-fm-2023"><span class="pub-label">[FM 2023]</span><div><a class="pub-title" href="https://doi.org/10.1007/978-3-031-27481-7_27" target="_blank" rel="noreferrer">Program Semantics and Verification Technique for AI-centred Programs</a><span class="pub-award">Best Paper Award</span><span class="pub-meta"><strong>Fortunat Rajaona</strong>, Ioana Boureanu, Vadim Malvone, Francesco Belardinelli</span></div></li>
+              <li><span class="pub-label">[NDSS 2023]</span><div><a class="pub-title" href="https://doi.org/10.14722/ndss.2023.23289" target="_blank" rel="noreferrer">Fine-Grained Trackability in Protocol Executions</a><span class="pub-meta">Ksenia Budykho, Ioana Boureanu, Steve Wesemeyer, <strong>Fortunat Rajaona</strong>, Daniel Romero, Matt Lewis, Steve Schneider</span></div></li>
+            </ul>
           </div>
         </section>
 
@@ -215,20 +221,13 @@
           </div>
         </section>
 
-        <section class="tiddler" id="position" data-section="position">
-          <div class="tiddler-head"><div><h2>Current position</h2></div></div>
-          <div class="tiddler-body">
-            <p><strong>Research Fellow in Secure Systems</strong><br>Surrey Centre for Cyber Security<br>University of Surrey, UK</p>
-          </div>
-        </section>
-
         <section class="tiddler" id="teaching" data-section="teaching">
           <div class="tiddler-head"><div><h2>Teaching experience</h2></div></div>
           <div class="tiddler-body">
             <ol class="timeline">
-              <li><time>2020 → now</time><article><h3>Research Fellow and MSc Supervisor</h3><p>University of Surrey · Guildford, Surrey, UK</p></article></li>
-              <li><time>2018 → 2019</time><article><h3>Contractual Lecturer</h3><p>École Normale Supérieure, University of Antananarivo · Madagascar</p></article></li>
-              <li><time>2013 → 2015</time><article><h3>Teaching Assistant</h3><p>University of Cape Town · South Africa</p></article></li>
+              <li><time>2020 → now</time><article><h3>Research Fellow and MSc Supervisor</h3><p>Surrey Centre for Cyber Security, Department of Computer Science, University of Surrey · Guildford, Surrey, UK</p></article></li>
+              <li><time>2018 → 2019</time><article><h3>Contractual Lecturer</h3><p>Department of Mathematics, École Normale Supérieure, University of Antananarivo · Madagascar</p></article></li>
+              <li><time>2013 → 2015</time><article><h3>Teaching Assistant</h3><p>Department of Mathematics and Applied Mathematics, University of Cape Town · South Africa</p></article></li>
             </ol>
           </div>
         </section>
@@ -240,27 +239,28 @@
               <li><time>2013 → 2016</time><article><h3>PhD in Mathematics</h3><p>University of Stellenbosch · South Africa</p></article></li>
               <li><time>2011 → 2013</time><article><h3>MSc in Computer Science</h3><p>University of Stellenbosch · South Africa</p></article></li>
               <li><time>2010 → 2011</time><article><h3>Postgraduate Diploma in Mathematical Sciences</h3><p>African Institute for Mathematical Sciences · South Africa</p></article></li>
-              <li><time>2006 → 2009</time><article><h3>BSc in Mathematics</h3><p>University of Antananarivo · Madagascar</p></article></li>
+              <li><time>2006 → 2009</time><article><h3>Maîtrise degrees in Mathematics</h3><p>University of Antananarivo · Madagascar</p></article></li>
             </ol>
           </div>
         </section>
 
         <section class="tiddler" id="recognition" data-section="recognition">
           <div class="tiddler-head"><div><h2>Recognition</h2></div></div>
-          <div class="tiddler-body grid-2">
-            <article class="award-card"><h3>Amazon Research Award</h3><p>2024 · Phoebe+: automated reasoning for provable privacy in cryptographic systems.</p></article>
-            <article class="award-card"><h3>Best Paper Award</h3><p>2023 · FM 2023 for work on semantics and verification of AI-centred programs.</p></article>
+          <div class="tiddler-body">
+            <ul class="recognition-list">
+              <li><time datetime="2024">2024</time><div><h3>Amazon Research Award</h3><p>Phoebe+: automated reasoning for provable privacy in cryptographic systems.</p></div></li>
+              <li><time datetime="2023">2023</time><div><h3>Best Paper Award</h3><p>FM 2023 for work on semantics and verification of AI-centred programs.</p></div></li>
+            </ul>
           </div>
         </section>
 
         <section class="tiddler" id="about" data-section="about">
           <div class="tiddler-head"><div><h2>My academic adventure</h2></div></div>
           <div class="tiddler-body">
-            <p>I grew up in Madagascar and chose Mathematics because it was my favourite subject at school. I especially enjoyed geometry, probability, mechanics, mathematical puzzles, and jokes. I began my undergraduate studies at the University of Antananarivo in 2006.</p>
-            <p>After completing my first degree in 2009, I was selected for the <a href="https://www.aims.ac.za/structured-masters-program/" target="_blank" rel="noreferrer">AIMS programme</a> in South Africa. Meeting students and lecturers from across Africa, Europe, and America opened up a new international academic world to me. I stayed in South Africa for my MSc and PhD, working with Jeff Sanders on formal methods, knowledge, and privacy. I received a full DAAD scholarship for my PhD.</p>
-            <p>In 2016, I moved to Germany and joined the <a href="https://moves.rwth-aachen.de/" target="_blank" rel="noreferrer">MOVES group at RWTH Aachen University</a> as a visiting researcher, where I worked on probabilistic programming and reasoning about knowledge and information flow. After returning to Madagascar, I taught Mathematics and Programming at the École Normale Supérieure in Antananarivo from 2018 to 2019.</p>
-            <p>In 2020, I joined the University of Surrey, where I continue the adventure as a researcher in formal methods and secure systems.</p>
-            <p class="muted">Beyond research, I remain interested in holistic education and education and development in Africa.</p>
+            <p>I grew up in Madagascar, where Mathematics was always my favourite subject at school. I especially enjoyed geometry, probability, mechanics, maths puzzles and jokes. I began my undergraduate studies at the University of Antananarivo in 2006.</p>
+            <p>After obtaining two <em>maîtrise</em> degrees in 2009, in pure and applied mathematics, I was selected for the <a href="https://www.aims.ac.za/structured-masters-program/" target="_blank" rel="noreferrer">AIMS programme</a> in South Africa. AIMS was a wonderful opportunity to study mathematics and computer science at an international level, with courses taught by renowned lecturers from across the world. It was also a great place to meet fellow African students and become part of a vibrant academic community. I stayed in South Africa for my MSc and PhD, working with Jeff Sanders on formal methods, knowledge, and privacy. I received a full DAAD scholarship for my PhD.</p>
+            <p>In 2016, I moved to Germany and joined the <a href="https://moves.rwth-aachen.de/" target="_blank" rel="noreferrer">MOVES group at RWTH Aachen University</a> as a visiting researcher. There, I worked on probabilistic programming and on reasoning about knowledge and information flow. After returning to Madagascar, I taught Mathematics and Programming at the École Normale Supérieure in Antananarivo from 2018 to 2019.</p>
+            <p>In 2020, I joined the University of Surrey, where I continue my academic adventure as a researcher in formal methods and secure systems.</p>
           </div>
         </section>
 
