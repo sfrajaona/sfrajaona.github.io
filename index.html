@@ -75,8 +75,8 @@
     .award-card { height: 100%; padding: 14px; border: 1px solid var(--line); border-radius: 4px; background: #fafbfc; }
     .award-card h3 { margin: 0 0 7px; font-size: 17px; }
     .award-card p { margin: 0; color: #4b5c62; font-size: 14px; line-height: 1.55; }
-    .project-list { display: grid; gap: 16px; }
-    .project-card { padding: 14px; border: 1px solid var(--line); border-radius: 4px; background: #fafbfc; }
+    .project-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .project-card { min-width: 0; width: 100%; padding: 14px; border: 1px solid var(--line); border-radius: 4px; background: #fafbfc; }
     .project-card h3 { margin: 0 0 7px; font-size: 17px; }
     .project-context { font-size: 13px; font-weight: 400; color: var(--muted); }
     .project-card p { margin: 10px 0; color: #4b5c62; font-size: 14px; line-height: 1.55; }
@@ -140,13 +140,11 @@
       <div class="shell">
         <nav aria-label="Primary navigation">
           <a href="#research">Research</a>
-          <a href="#projects">Projects</a>
           <a href="#publications">Publications</a>
           <a href="#experience">Research experience</a>
           <a href="#teaching">Teaching experience</a>
-          <a href="#education">Education</a>
           <a href="#recognition">Recognition</a>
-          <a href="#about">My academic adventure</a>
+          <a href="#about">About me</a>
           <a href="#contact">Contact</a>
         </nav>
       </div>
@@ -162,13 +160,11 @@
         <p class="side-label">Contents</p>
         <ul class="toc">
           <li><a href="#research">Research</a></li>
-          <li><a href="#projects">Projects</a></li>
           <li><a href="#publications">Publications</a></li>
           <li><a href="#experience">Research experience</a></li>
           <li><a href="#teaching">Teaching experience</a></li>
-          <li><a href="#education">Education</a></li>
           <li><a href="#recognition">Recognition</a></li>
-          <li><a href="#about">My academic adventure</a></li>
+          <li><a href="#about">About me</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </aside>
@@ -176,22 +172,19 @@
       <main>
         <section class="intro" aria-labelledby="page-title">
           <h1 id="page-title">Welcome</h1>
-          <p class="lede">I am a researcher in formal methods and secure systems. I develop mathematical models and automated tools, and apply them to analyse real-world systems, with a focus on privacy, security, knowledge, and coordination in complex systems. I am currently a Research Fellow in Secure Systems at the Surrey Centre for Cyber Security, University of Surrey, UK.</p>
+          <p class="lede">I’m Fortunat. I am a Research Fellow in Secure Systems at the Surrey Centre for Cyber Security, University of Surrey, UK.</p>
         </section>
 
         <section class="tiddler" id="research" data-section="research">
           <div class="tiddler-head"><div><h2>Research</h2></div></div>
           <div class="tiddler-body">
-            <p>My research sits at the intersection of <strong>formal verification</strong>, <strong>applied cryptography</strong>, and <strong>multi-agent systems</strong>. I use logic, semantics, model checking, and automated reasoning to make security and privacy claims precise, rigorous, and verifiable.</p>
-          </div>
-        </section>
-
-        <section class="tiddler" id="projects" data-section="projects">
-          <div class="tiddler-head"><div><h2>Projects</h2></div></div>
-          <div class="tiddler-body project-list">
-            <article class="project-card"><h3>Future of Digital Power of Attorney (dPOA) <span class="project-context">(led by Prof Helen Treharne; 2025–present)</span></h3><p>Our current project explores the digitalisation of power-of-attorney schemes, focusing on the risks of fraud introduced by digitalisation, ways to mitigate existing fraud and abuse in traditional systems, and usability challenges for vulnerable individuals who may require third-party digital assistance. The project led to the <a href="#pub-esorics-2026">ESORICS 2026</a> paper.</p></article>
-            <article class="project-card"><h3>ESKMARALD Project <span class="project-context">(led by Prof Ioana Boureanu; NCSC-funded, 2023–2024)</span></h3><p>I investigated the security and privacy of the <strong>3GPP AKMA protocol standard</strong> by formalising its security and privacy requirements, using tools such as <strong>Tamarin</strong> and <strong>Squirrel Prover</strong> to uncover privacy flaws, and proposing a privacy-enhanced version of AKMA.</p><p>This research resulted in two publications: <a href="#pub-eurosp-2025">EuroS&amp;P 2025</a> and <a href="https://doi.org/10.1145/3708821.3733910" target="_blank" rel="noreferrer">ASIACCS 2025</a>.</p></article>
-            <article class="project-card"><h3>AUTOPASS Project <span class="project-context">(led by Prof Ioana Boureanu; EPSRC-funded, 2020–2022)</span></h3><p>I developed a framework for reasoning about and analysing privacy in cryptographic protocols. This involved designing a protocol model and a non-classical logic language for specifying privacy properties, building <strong>Phoebe</strong> as a model-checking tool for the framework, and analysing benchmark privacy-preserving protocols.</p><p>In 2024, the project received an <strong>Amazon Research Award</strong> to further enhance Phoebe. I co-authored several conference papers, including <a href="#pub-csf-2024">CSF 2024</a>; our work on epistemic logic and AI reasoning received the Best Paper Award at <a href="#pub-fm-2023">FM 2023</a>.</p></article>
+            <p>My research develops mathematical frameworks and verification tools for analysing security and privacy. I design formal models and logical methods, implement automated reasoning and model-checking tools, and apply them to real-world protocols and systems. It sits at the intersection of <strong>formal verification</strong>, <strong>applied cryptography</strong>, and <strong>multi-agent systems</strong>.</p>
+            <h3>Projects</h3>
+            <div class="project-list">
+              <article class="project-card"><h3>Future of Digital Power of Attorney (dPOA) <span class="project-context">(led by Prof Helen Treharne; 2025–present)</span></h3><p>Our current project explores the digitalisation of power-of-attorney schemes, focusing on the risks of fraud introduced by digitalisation, ways to mitigate existing fraud and abuse in traditional systems, and usability challenges for vulnerable individuals who may require third-party digital assistance. The project led to the <a href="#pub-esorics-2026">ESORICS 2026</a> paper.</p></article>
+              <article class="project-card"><h3>ESKMARALD Project <span class="project-context">(led by Prof Ioana Boureanu; NCSC-funded, 2023–2024)</span></h3><p>I investigated the security and privacy of the <strong>3GPP AKMA protocol standard</strong> by formalising its security and privacy requirements, using tools such as <strong>Tamarin</strong> and <strong>Squirrel Prover</strong> to uncover privacy flaws, and proposing a privacy-enhanced version of AKMA.</p><p>This research resulted in two publications: <a href="#pub-eurosp-2025">EuroS&amp;P 2025</a> and <a href="https://doi.org/10.1145/3708821.3733910" target="_blank" rel="noreferrer">ASIACCS 2025</a>.</p></article>
+              <article class="project-card"><h3>AUTOPASS Project <span class="project-context">(led by Prof Ioana Boureanu; EPSRC-funded, 2020–2022)</span></h3><p>I developed a framework for reasoning about and analysing privacy in cryptographic protocols. This involved designing a protocol model and a non-classical logic language for specifying privacy properties, building <strong>Phoebe</strong> as a model-checking tool for the framework, and analysing benchmark privacy-preserving protocols.</p><p>In 2024, the project received an <strong>Amazon Research Award</strong> to further enhance Phoebe. I co-authored several conference papers, including <a href="#pub-csf-2024">CSF 2024</a>; our work on epistemic logic and AI reasoning received the Best Paper Award at <a href="#pub-fm-2023">FM 2023</a>.</p></article>
+            </div>
           </div>
         </section>
 
@@ -232,18 +225,6 @@
           </div>
         </section>
 
-        <section class="tiddler" id="education" data-section="education">
-          <div class="tiddler-head"><div><h2>Education</h2></div></div>
-          <div class="tiddler-body">
-            <ol class="timeline">
-              <li><time>2013 → 2016</time><article><h3>PhD in Mathematics</h3><p>University of Stellenbosch · South Africa</p></article></li>
-              <li><time>2011 → 2013</time><article><h3>MSc in Computer Science</h3><p>University of Stellenbosch · South Africa</p></article></li>
-              <li><time>2010 → 2011</time><article><h3>Postgraduate Diploma in Mathematical Sciences</h3><p>African Institute for Mathematical Sciences · South Africa</p></article></li>
-              <li><time>2006 → 2009</time><article><h3>Maîtrise degrees in Mathematics</h3><p>University of Antananarivo · Madagascar</p></article></li>
-            </ol>
-          </div>
-        </section>
-
         <section class="tiddler" id="recognition" data-section="recognition">
           <div class="tiddler-head"><div><h2>Recognition</h2></div></div>
           <div class="tiddler-body">
@@ -255,10 +236,18 @@
         </section>
 
         <section class="tiddler" id="about" data-section="about">
-          <div class="tiddler-head"><div><h2>My academic adventure</h2></div></div>
+          <div class="tiddler-head"><div><h2>About me</h2></div></div>
           <div class="tiddler-body">
+            <h3>Education</h3>
+            <ol class="timeline">
+              <li><time>2013 → 2016</time><article><h3>PhD in Mathematics</h3><p>University of Stellenbosch · South Africa</p></article></li>
+              <li><time>2011 → 2013</time><article><h3>MSc in Computer Science</h3><p>University of Stellenbosch · South Africa</p></article></li>
+              <li><time>2010 → 2011</time><article><h3>Postgraduate Diploma in Mathematical Sciences</h3><p>African Institute for Mathematical Sciences · South Africa</p></article></li>
+              <li><time>2006 → 2009</time><article><h3>Maîtrise degrees in Mathematics</h3><p>University of Antananarivo · Madagascar</p></article></li>
+            </ol>
+            <h3>Academic adventure</h3>
             <p>I grew up in Madagascar, where Mathematics was always my favourite subject at school. I especially enjoyed geometry, probability, mechanics, maths puzzles and jokes. I began my undergraduate studies at the University of Antananarivo in 2006.</p>
-            <p>After obtaining two <em>maîtrise</em> degrees in 2009, in pure and applied mathematics, I was selected for the <a href="https://www.aims.ac.za/structured-masters-program/" target="_blank" rel="noreferrer">AIMS programme</a> in South Africa. AIMS was a wonderful opportunity to study mathematics and computer science at an international level, with courses taught by renowned lecturers from across the world. It was also a great place to meet fellow African students and become part of a vibrant academic community. I stayed in South Africa for my MSc and PhD, working with Jeff Sanders on formal methods, knowledge, and privacy. I received a full DAAD scholarship for my PhD.</p>
+            <p>After obtaining two <em>maîtrise</em> degrees in 2009, in pure and applied mathematics, I was selected for the <a href="https://www.aims.ac.za/structured-masters-program/" target="_blank" rel="noreferrer">AIMS programme</a> in South Africa. AIMS was a wonderful opportunity to study mathematics and computer science at an international level, with courses taught by renowned lecturers from across the world. It was also a great place to meet fellow African students and become part of the vibrant AIMS community. I stayed in South Africa for my MSc and PhD, working with Jeff Sanders on formal methods, knowledge, and privacy. I received a full DAAD scholarship for my PhD.</p>
             <p>In 2016, I moved to Germany and joined the <a href="https://moves.rwth-aachen.de/" target="_blank" rel="noreferrer">MOVES group at RWTH Aachen University</a> as a visiting researcher. There, I worked on probabilistic programming and on reasoning about knowledge and information flow. After returning to Madagascar, I taught Mathematics and Programming at the École Normale Supérieure in Antananarivo from 2018 to 2019.</p>
             <p>In 2020, I joined the University of Surrey, where I continue my academic adventure as a researcher in formal methods and secure systems.</p>
           </div>
