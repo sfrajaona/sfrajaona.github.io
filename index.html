@@ -191,9 +191,10 @@
     .project-card h3, .award-card h3 { margin-top: 0; font-size: 18px; }
     .project-card p, .award-card p, .recognition-list p, .timeline p { color: #4d5661; font-size: 15px; }
     .timeline > li, .pubs > li { grid-template-columns: 132px minmax(0, 1fr); padding-bottom: 28px; }
-    .timeline time, .pub-label, .recognition-list time { color: #77818c; font-size: 12px; }
-    .pubs > li { display: block; }
-    .pub-label { display: block; margin-bottom: 6px; }
+    .timeline time, .recognition-list time { color: #77818c; font-size: 12px; }
+    .pubs > li { display: grid; grid-template-columns: 122px minmax(0, 1fr); gap: 8px; align-items: baseline; }
+    .pub-label { display: block; width: auto; margin-right: 0; color: var(--teal); font: 700 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .02em; }
+    .pubs > li > div { display: block; min-width: 0; }
     .timeline article { padding-left: 22px; border-left: 1px solid #d9dee4; }
     .timeline article::before { background: var(--teal); box-shadow: 0 0 0 4px var(--teal-soft); }
     .pub-title { font-weight: 650; }
